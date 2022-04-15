@@ -21,10 +21,11 @@ export default {
 </script>
 
 <style lang="scss">
-  .auth-container {
-    /*min-height: calc(100vh - 44px);*/
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 20%;
-  }
+.auth-container {
+  /*min-height: calc(100vh - 44px);*/
+  position: relative;
+  top: 150px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 </style>

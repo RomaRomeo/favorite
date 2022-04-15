@@ -52,6 +52,12 @@ const routes = [
     meta: { layout: "main" },
     component: () => import("../views/About.vue"),
   },
+  {
+    path: "/profile",
+    name: "profile",
+    meta: { layout: "empty" },
+    component: () => import("../views/Profile.vue"),
+  },
 ];
 
 const router = new VueRouter({
