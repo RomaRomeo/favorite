@@ -1,7 +1,10 @@
 <template>
   <div style="position: relative; max-width: 600px; margin: 0 auto; top: 30%">
-    <h1>Кабінет адміністратора</h1>
-    <form style="background-color: ivory; padding: 20px">
+    <v-btn style="position: absolute; right: 0" icon @click="back">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+    <form style="background-color: white" class="pa-10">
+      <h2>Кабінет адміністратора</h2>
       <v-text-field
         v-model="adminData.login"
         :error-messages="loginErrors"
@@ -20,10 +23,15 @@
         @input="$v.adminData.password.$touch()"
         @blur="$v.adminData.password.$touch()"
       ></v-text-field>
-      <div class="d-flex justify-center mt-10">
-        <v-btn @click="clear">Очисити</v-btn>
-        <v-btn @click="back" class="ml-5 mr-5">На головну</v-btn>
-        <v-btn class="mr-4" @click="submit">Увійти</v-btn>
+      <div class="d-flex mt-15">
+        <v-btn class="mr-5" color="red" @click="submit" :disabled="!canLogin">
+          Увійти
+        </v-btn>
+        <v-btn
+          :disabled="!adminData.login && !adminData.password"
+          @click="clear"
+          >Очисити</v-btn
+        >
       </div>
     </form>
   </div>
@@ -66,6 +74,14 @@ export default {
         errors.push("Паорль має містити не більше 10 символів.");
       !this.$v.adminData.password.required && errors.push("Укажіть пароль.");
       return errors;
+    },
+    canLogin() {
+      return Boolean(
+        !this.loginErrors.length &&
+          !this.passwordErrors.length &&
+          this.adminData.login &&
+          this.adminData.password
+      );
     },
   },
 

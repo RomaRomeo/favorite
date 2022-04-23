@@ -3,15 +3,11 @@ import axios from "axios";
 export default {
   state: {
     adverts: [],
-    promotions: [],
   },
   getters: {
     allAdverts(state) {
       return state.adverts;
-    },
-    allPromotions(state) {
-      return state.promotions;
-    },
+    }
   },
   actions: {
     fetchAdverts({ commit }) {
@@ -28,30 +24,14 @@ export default {
         .catch((error) => {
           console.warn("Error while fetching adverts", error);
         });
-    },
-    fetchPromotions({ commit }) {
-      axios
-        .get("https://jsonplaceholder.typicode.com/posts?_limit=10")
-        .then((response) => {
-          const promotions = response.data;
-
-          commit("updatePromotions", promotions);
-          console.log("Promotions successfully received", promotions);
-        })
-        .catch((error) => {
-          console.warn("Error while fetching promotions", error);
-        });
-    },
+    }
   },
   mutations: {
-    updateAdverts(state, adverts) {
-      state.adverts = adverts;
-    },
     createAdvert(state, newAdverts) {
       state.adverts.unshift(newAdverts);
     },
-    updatePromotions(state, promotions) {
-      state.promotions = promotions;
-    },
+    updateAdverts(state, adverts) {
+      state.adverts = adverts;
+    }
   },
 };

@@ -17,12 +17,6 @@ const routes = [
     component: () => import("../views/Advert.vue"),
   },
   {
-    path: "/promotions",
-    name: "promotions",
-    meta: { layout: "main" },
-    component: () => import("../views/Promotions.vue"),
-  },
-  {
     path: "/internet",
     name: "internet",
     meta: { layout: "main" },

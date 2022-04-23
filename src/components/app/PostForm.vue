@@ -1,50 +1,39 @@
 <template>
   <div>
-    <v-expansion-panels>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          <h2>Створити новий пост</h2>
-        </v-expansion-panel-header>
-
-        <v-expansion-panel-content>
-          <form>
-            <v-text-field
-              v-model="title"
-              label="Назва посту"
-              required
-              :error-messages="titleErrors"
-              @input="$v.title.$touch()"
-              @blur="$v.title.$touch()"
-            ></v-text-field>
-            <v-text-field
-              v-model="overview"
-              label="Деталі посту"
-              required
-              :error-messages="overviewErrors"
-              @input="$v.overview.$touch()"
-              @blur="$v.overview.$touch()"
-            ></v-text-field>
-            <v-btn
-              depressed
-              class="mt-15 mr-5"
-              color="red"
-              :disabled="!canCreatePost"
-              @click="submit"
-            >
-              Створити
-            </v-btn>
-            <v-btn
-              depressed
-              class="mt-15"
-              :disabled="!title && !overview"
-              @click="clear"
-            >
-              Очисити
-            </v-btn>
-          </form>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+    <v-btn style="position: absolute; right: 0" icon @click="$emit('close')">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+    <form class="pa-10">
+      <h2>Створити новий пост</h2>
+      <v-text-field
+        v-model="title"
+        label="Назва посту"
+        required
+        :error-messages="titleErrors"
+        @input="$v.title.$touch()"
+        @blur="$v.title.$touch()"
+      ></v-text-field>
+      <v-textarea
+        v-model="body"
+        filled
+        label="Деталі посту"
+        required
+        :error-messages="bodyErrors"
+        @input="$v.body.$touch()"
+        @blur="$v.body.$touch()"
+      ></v-textarea>
+      <v-btn
+        class="mt-15 mr-5"
+        color="red"
+        :disabled="!canCreatePost"
+        @click="submit"
+      >
+        Створити
+      </v-btn>
+      <v-btn class="mt-15" :disabled="!title && !body" @click="clear">
+        Очисити
+      </v-btn>
+    </form>
   </div>
 </template>
 
@@ -60,7 +49,7 @@ export default {
       required,
       minLength: minLength(5),
     },
-    overview: {
+    body: {
       required,
       minLength: minLength(10),
     },
@@ -69,7 +58,7 @@ export default {
   data() {
     return {
       title: "",
-      overview: "",
+      body: "",
     };
   },
   computed: {
@@ -81,20 +70,20 @@ export default {
       !this.$v.title.required && errors.push("Укажіть заголовок.");
       return errors;
     },
-    overviewErrors() {
+    bodyErrors() {
       const errors = [];
-      if (!this.$v.overview.$dirty) return errors;
-      !this.$v.overview.minLength &&
+      if (!this.$v.body.$dirty) return errors;
+      !this.$v.body.minLength &&
         errors.push("Опис має містити більше 10 символів.");
-      !this.$v.overview.required && errors.push("Укажіть опис.");
+      !this.$v.body.required && errors.push("Укажіть опис.");
       return errors;
     },
     canCreatePost() {
-      return (
+      return Boolean(
         !this.titleErrors.length &&
-        !this.overviewErrors.length &&
-        this.title &&
-        this.overview
+          !this.bodyErrors.length &&
+          this.title &&
+          this.body
       );
     },
   },
@@ -102,22 +91,23 @@ export default {
     submit() {
       const data = {
         title: this.title,
-        overview: this.overview,
+        body: this.body,
         id: Date.now(),
       };
 
       if (this.canCreatePost) {
         this.$emit("form-data", data);
+        this.$emit("close");
 
         this.$v.$reset();
         this.title = "";
-        this.overview = "";
+        this.body = "";
       }
     },
     clear() {
       this.$v.$reset();
       this.title = "";
-      this.overview = "";
+      this.body = "";
     },
   },
 };

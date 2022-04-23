@@ -1,10 +1,26 @@
 <template>
-  <div>
-    <PostForm class="ma-10" @form-data="createPost" />
+  <div class="auth-container">
+    <div v-if="true">
+      <ModalCreatePost
+        :open="openModal"
+        @close="toogleModal"
+        @form-data="createPost"
+      />
+      <v-btn
+        class="mx-2"
+        style="position: relative; left: 89%; margin-top: 40px"
+        fab
+        dark
+        color="indigo"
+        @click.stop="toogleModal"
+      >
+        <v-icon dark> mdi-plus </v-icon>
+      </v-btn>
+    </div>
     <div v-for="post in allAdverts" :key="post.id" class="ma-10">
       <v-card elevation="5">
         <v-card-title>{{ post.title }}</v-card-title>
-        <v-card-text>{{ post.overview }}</v-card-text>
+        <v-card-text>{{ post.overview || post.body }}</v-card-text>
         <v-img
           class="white--text align-end"
           height="300"
@@ -18,15 +34,15 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
-import PostForm from "@/components/app/PostForm";
+import ModalCreatePost from "@/components/app/modals/ModalCreatePost";
 
 export default {
   name: "Advert",
   components: {
-    PostForm,
+    ModalCreatePost,
   },
   data: () => ({
-    drawer: false,
+    openModal: false,
   }),
   mounted() {
     this.fetchAdverts();
@@ -41,6 +57,9 @@ export default {
     createPost(data) {
       this.createAdvert(data);
     },
+    toogleModal() {
+      this.openModal = !this.openModal;
+    }
   },
 };
 </script>
