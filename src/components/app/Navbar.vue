@@ -87,7 +87,7 @@ export default {
   name: "Navbar",
   data: () => ({
     links: [
-      { title: "Головна", url: "/" },
+      { title: "Мейн", url: "/" },
       { title: "Новини", url: "/advert" },
       { title: "Інтернет", url: "/internet" },
       { title: "Телебачення", url: "/tv" },
