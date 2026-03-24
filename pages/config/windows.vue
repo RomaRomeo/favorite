@@ -1,54 +1,33 @@
 <script setup lang="ts">
 import { ModalWindowsConfig } from "#components";
+
+useSeoMeta({
+  title: 'Налаштування PPPoE у Windows',
+  description: 'Покрокові інструкції з налаштування PPPoE підключення у Windows 11, 10, 7 та XP від Фаворит ТВ/НЕТ.',
+  ogTitle: 'Налаштування PPPoE у Windows | Фаворит ТВ/НЕТ',
+  ogDescription: 'Детальні інструкції з налаштування інтернет-підключення PPPoE у Windows.',
+  ogImage: '/images/logo/logo-dark.png',
+})
+
 const modal = useModal();
 
-const articles = [
-  {
-    image: "/images/banners/windows-11-logo.jpg",
-    title: "Налаштування PPPoE підключення у Windows 11",
-    description: "Детальна інструкція з налаштування PPPoE-з'єднання у Windows 11. Дізнайтесь, як створити підключення, ввести дані провайдера та усунути можливі проблеми з мережею.",
-    category: "Інтернет та мережі",
-    date: "28 Квітня 2025",
-    id: 'windows-11'
-  },
-  {
-    image: "/images/banners/windows-10-logo.jpg",
-    title: "Налаштування PPPoE підключення у Windows 10",
-    description: "Детальна інструкція з налаштування PPPoE-з'єднання у Windows 10. Дізнайтесь, як створити підключення, ввести дані провайдера та усунути можливі проблеми з мережею.",
-    category: "Інтернет та мережі",
-    date: "28 Лютого 2025",
-    id: 'windows-10'
-  },
-  {
-    image: "/images/banners/windows-7-logo.jpg",
-    title: "Налаштування PPPoE підключення у Windows 7",
-    description: "Покроковий гід із налаштування PPPoE-з'єднання у Windows 7. Як правильно створити з'єднання, внести параметри та вирішити можливі проблеми з підключенням.",
-    category: "Інтернет та мережі",
-    date: "28 Лютого 2025",
-    id: 'windows-7'
-  },
-  {
-    image: "/images/banners/windows-xp-logo.jpg",
-    title: "Налаштування PPPoE підключення у Windows XP",
-    description: "Покроковий гід із налаштування PPPoE-з'єднання у Windows 7. Як правильно створити з'єднання, внести параметри та вирішити можливі проблеми з підключенням.",
-    category: "Інтернет та мережі",
-    date: "02 Лютого 2010",
-    id: 'windows-xp'
-  },
-];
+const { data } = await useFetch<{ data: any[] }>('/json/config-windows.json')
+const articles = computed(() => data.value?.data ?? [])
+
 function onSelectInternetPlanClick(id: string) {
   modal.open(ModalWindowsConfig, { type: id });
 }
 </script>
+
 <template>
-  <UContainer>
-    <h2 class="text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+  <UContainer class="pt-10 md:pt-12 pb-16">
+    <h2 class="text-3xl font-semibold text-slate-900 mb-4">
       Як налаштувати PPPoE підключення у Windows: покрокова інструкція
     </h2>
 
     <USeparator orientation="horizontal" class="my-8" />
 
-    <p class="text-lg text-gray-500 dark:text-gray-300 mb-10">
+    <p class="text-lg text-slate-500 mb-10">
       Налаштування PPPoE підключення у Windows дозволяє отримати доступ до
       інтернету. У цих статтях ви знайдете покрокову інструкцію зі створення та
       налаштування PPPoE-з'єднання, поради щодо усунення можливих проблем та

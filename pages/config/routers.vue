@@ -1,39 +1,34 @@
 <script setup lang="ts">
 import { ModalRouterConfig } from "#components";
+
+useSeoMeta({
+  title: 'Налаштування роутерів',
+  description: 'Покрокові інструкції з налаштування Wi-Fi роутерів TP-Link та Netis від Фаворит ТВ/НЕТ.',
+  ogTitle: 'Налаштування роутерів | Фаворит ТВ/НЕТ',
+  ogDescription: 'Детальні інструкції з налаштування популярних Wi-Fi роутерів.',
+  ogImage: '/images/logo/logo-dark.png',
+})
+
 const modal = useModal();
 
-const articles = [
-  {
-    image: "/images/banners/tp-link_wr841n.jpg",
-    title: "Налаштування роутера TP-Link WR841N",
-    description: "Покрокова інструкція з налаштування Wi-Fi роутера TP-Link WR841N: як підключити пристрій, зайти в панель керування, налаштувати інтернет-з’єднання та забезпечити безпеку мережі.",
-    category: "Інтернет та мережі",
-    date: "04 Травня 2025",
-    id: 'tp-link'
-  },
-  {
-    image: "/images/banners/netis-wf2411.jpg",
-    title: "Налаштування роутера Netis WF2411",
-    description: "Детальна інструкція з налаштування роутера Netis WF2411: як підключити пристрій, увійти в веб-інтерфейс, встановити параметри інтернету та Wi-Fi, а також захистити мережу паролем.",
-    category: "Інтернет та мережі",
-    date: "04 Травня 2025",
-    id: 'netis'
-  },
-];
+const { data } = await useFetch<{ data: any[] }>('/json/config-routers.json')
+const articles = computed(() => data.value?.data ?? [])
+
 function onSelectRouterClick(id: string) {
   modal.open(ModalRouterConfig, { type: id });
 }
 </script>
+
 <template>
-  <UContainer>
-    <h2 class="text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+  <UContainer class="pt-10 md:pt-12 pb-16">
+    <h2 class="text-3xl font-semibold text-slate-900 mb-4">
       Як налаштувати Wi-Fi роутер: покрокові інструкції для популярних моделей
     </h2>
 
     <USeparator orientation="horizontal" class="my-8" />
 
-    <p class="text-lg text-gray-500 dark:text-gray-300 mb-10">
-      Найдетальніший гід із налаштування домашніх Wi-Fi роутерів — від підключення до інтернету до захисту мережі. 
+    <p class="text-lg text-slate-500 mb-10">
+      Найдетальніший гід із налаштування домашніх Wi-Fi роутерів — від підключення до інтернету до захисту мережі.
       Доступні інструкції для TP-Link, Netis, та інших моделей з прикладами, скріншотами та порадами.
     </p>
 

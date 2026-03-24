@@ -8,54 +8,88 @@ const props = defineProps<{
   features: string[];
   isRecommended?: boolean;
   isSelected?: boolean;
-}>();
-const emit = defineEmits(["onCardClick"]);
+}>()
+
+const emit = defineEmits(['onCardClick'])
 </script>
 
 <template>
   <div
-    class="w-full min-h-[320px] px-6 py-4 border border-sky-200 transition-shadow duration-300 hover:shadow-lg transition-colors duration-300 transform rounded-lg bg-gray-50 dark:bg-gray-800 flex flex-col"
+    class="relative w-full flex flex-col h-full rounded-2xl border transition-all duration-300 hover:-translate-y-1"
+    :class="[
+      props.isRecommended
+        ? 'bg-gradient-to-b from-white to-blue-50/40 border-blue-400 shadow-lg shadow-blue-500/10 ring-1 ring-blue-400/30 hover:shadow-xl hover:shadow-blue-500/15'
+        : 'bg-white border-slate-200/80 shadow-sm hover:shadow-lg hover:border-slate-300',
+    ]"
   >
     <div
       v-if="props.isRecommended"
-      class="absolute -top-4 right-4 flex items-center gap-1 px-3 py-1 text-xs font-semibold text-white uppercase bg-[#eb5c78] rounded-full shadow-md"
+      class="absolute -top-3.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-full shadow-md shadow-blue-500/30 whitespace-nowrap uppercase tracking-wide"
     >
-      <UIcon name="material-symbols:star-rounded" class="w-4 h-4" />
-      <span>Рекомендовано</span>
+      <UIcon name="i-heroicons-star-20-solid" class="w-3.5 h-3.5" />
+      Рекомендовано
     </div>
 
-    <div class="text-center">
-      <p class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
+    <div class="p-6 flex flex-col flex-1">
+      <p
+        class="text-xs font-semibold uppercase tracking-widest"
+        :class="props.isRecommended ? 'text-blue-600' : 'text-slate-400'"
+      >
         {{ props.name }}
       </p>
+
+      <div class="mt-4">
+        <span class="text-4xl font-extrabold" :class="props.isRecommended ? 'text-slate-900' : 'text-slate-800'">{{ props.price }}</span>
+        <span class="text-slate-400 ml-1 text-sm">/міс</span>
+      </div>
+
+      <div v-if="props.speed" class="mt-3">
+        <span
+          class="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full"
+          :class="props.isRecommended
+            ? 'text-blue-700 bg-blue-100/80'
+            : 'text-blue-600 bg-blue-50'"
+        >
+          <UIcon name="i-heroicons-bolt-20-solid" class="w-4 h-4" />
+          {{ props.speed }}
+        </span>
+      </div>
+
       <p
+        v-if="props.description"
         :title="props.description"
-        class="mt-4 text-gray-500 dark:text-gray-300 h-12 overflow-hidden break-words line-clamp-2"
+        class="mt-4 text-sm line-clamp-2"
+        :class="props.isRecommended ? 'text-slate-600' : 'text-slate-400'"
       >
         {{ props.description }}
       </p>
-      <h4 class="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100">
-        {{ props.price }}
-      </h4>
-      <p class="mt-4 text-gray-500 dark:text-gray-300">/в місяць</p>
+
+      <ul class="mt-6 space-y-2.5 flex-1">
+        <li
+          v-for="feature in props.features"
+          :key="feature"
+          class="flex items-start gap-2.5"
+        >
+          <UIcon
+            name="i-heroicons-check-circle-20-solid"
+            class="w-5 h-5 shrink-0 mt-0.5"
+            :class="props.isRecommended ? 'text-blue-500' : 'text-green-500'"
+          />
+          <span class="text-sm" :class="props.isRecommended ? 'text-slate-700' : 'text-slate-600'">{{ feature }}</span>
+        </li>
+      </ul>
+
+      <UButton
+        label="Обрати тариф"
+        :size="props.isRecommended ? 'xl' : 'lg'"
+        class="mt-6 w-full justify-center font-semibold cursor-pointer transition-all duration-200"
+        :class="props.isRecommended
+          ? 'bg-blue-600 hover:bg-blue-700 text-white hover:scale-[1.02]'
+          : 'hover:border-slate-400'"
+        :color="props.isRecommended ? 'primary' : 'neutral'"
+        :variant="props.isRecommended ? 'solid' : 'outline'"
+        @click.stop="emit('onCardClick')"
+      />
     </div>
-
-    <div class="my-8 space-y-4 flex flex-col">
-      <div
-        v-for="feature in props.features"
-        :key="feature"
-        class="flex items-center inline-block"
-      >
-        <UIcon name="mdi:check-decagram" class="w-4 h-4 bg-sky-500" />
-
-        <span class="mx-4 text-gray-700 dark:text-gray-300">{{ feature }}</span>
-      </div>
-    </div>
-
-    <UButton
-      label="Вибрати"
-      class="mt-auto w-full justify-center uppercase bg-sky-500 px-4 py-2 hover:bg-sky-400"
-      @click="$emit('onCardClick')"
-    />
   </div>
 </template>

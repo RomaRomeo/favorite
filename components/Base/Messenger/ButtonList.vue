@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { siteConfig } from '~/config/site'
+
 const sizes = {
   "sm": "h-6 w-6",
   "lg": "h-10 w-10 md:h-16 md:w-16",
@@ -20,18 +22,9 @@ interface MessengerButton {
 }
 
 const messengerButtons: MessengerButton[] = [
-  {
-    name: "Facebook",
-    link: "https://www.facebook.com/favorite.tvnet",
-  },
-  {
-    name: "Viber",
-    link: "https://invite.viber.com/?g2=AQAvJjH5ZSwWSFO3Xb%2FCTluB3heLNUwyzQHSwO3d9gfbaw%2FhAXfPWyDskMkPI%2FcN",
-  },
-  {
-    name: "Telegram",
-    link: "https://t.me/favoryttvnet",
-  },
+  { name: "Facebook", link: siteConfig.social.facebook },
+  { name: "Viber", link: siteConfig.social.viber },
+  { name: "Telegram", link: siteConfig.social.telegram },
 ];
 </script>
 

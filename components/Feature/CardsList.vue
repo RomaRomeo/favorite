@@ -2,14 +2,14 @@
 // import { link } from '#build/ui';
 
 interface Feature {
-  icon: string;
-  title: string;
-  description: string;
-  link?: string; 
+  readonly icon: string;
+  readonly title: string;
+  readonly description: string;
+  readonly link?: string;
 }
 
 const props = defineProps<{
-  items: Feature[];
+  items: readonly Feature[];
 }>();
 </script>
 <template>

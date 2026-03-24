@@ -1,13 +1,12 @@
 <script setup lang="ts">
-// remove in future
 const color = useColorMode();
 color.preference = 'light';
 </script>
 <template>
-  <div class="min-h-screen bg-gray-100">
+  <div class="min-h-screen flex flex-col bg-[#F8FAFC]">
     <AppHeader />
 
-    <main class="flex-1 p-6 h-full min-h-[calc(100vh-136px)]">
+    <main class="flex-1">
       <NuxtPage />
     </main>
 

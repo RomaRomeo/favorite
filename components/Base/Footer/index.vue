@@ -1,21 +1,22 @@
 <template>
-  <footer class="bg-[#f0fbff] shadow">
-    <div class="container p-6 mx-auto">
-      <div class="lg:flex">
-        <div class="w-full -mx-6 lg:w-2/5">
-          <div class="px-4">
-            <slot name="left" />
-          </div>
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="container mx-auto px-6 pt-12 pb-8">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-8">
+        <div class="lg:col-span-2">
+          <slot name="left" />
         </div>
 
-        <slot name="middle" />
+        <div class="lg:col-span-3">
+          <slot name="middle" />
+        </div>
       </div>
 
-      <hr class="h-px my-6 bg-gray-200 border-none dark:bg-gray-700" />
-
-      <div>
-        <p class="text-center text-gray-500 dark:text-gray-400">
-          © 2024 Favorite - All rights reserved
+      <div class="mt-10 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs text-slate-500">
+          © {{ new Date().getFullYear() }} Фаворит ТВ/НЕТ — Усі права захищені
+        </p>
+        <p class="text-xs text-slate-600">
+          м. Ходорів, Львівська область
         </p>
       </div>
     </div>

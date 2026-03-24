@@ -4,34 +4,29 @@ type Section = { title: string; links: Link[] };
 
 const props = defineProps<{
   sections: Section[];
-}>();
+}>()
 </script>
 
 <template>
-  <div class="mt-6 lg:mt-0 lg:flex-1">
-    <div
-      class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-    >
-      <div v-for="(section, index) in sections" :key="index">
-        <h3 class="text-gray-700 uppercase dark:text-white">
-          {{ section.title }}
-        </h3>
-        <template v-for="(link, i) in section.links" :key="i">
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-8">
+    <div v-for="(section, index) in sections" :key="index">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400 mb-4">
+        {{ section.title }}
+      </h3>
+      <ul class="space-y-2.5">
+        <li v-for="(link, i) in section.links" :key="i">
           <NuxtLink
             v-if="link.url"
             :to="link.url"
-            class="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+            class="text-sm text-slate-400 hover:text-white transition-colors duration-200"
           >
             {{ link.label }}
           </NuxtLink>
-          <span
-            v-else
-            class="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-          >
+          <span v-else class="text-sm text-slate-400">
             {{ link.label }}
           </span>
-        </template>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

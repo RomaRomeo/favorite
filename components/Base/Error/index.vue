@@ -8,17 +8,13 @@ const handleError = () => clearError({ redirect: "/" });
 <template>
   <div class="flex items-center min-h-screen">
     <div class="flex flex-col items-center max-w-sm mx-auto text-center">
-      <p
-        class="p-3 text-sm font-medium text-blue-500 rounded-full bg-blue-50 dark:bg-gray-800"
-      >
+      <p class="p-3 text-sm font-medium text-blue-500 rounded-full bg-blue-50">
         <UIcon name="ion:ios-warning" class="w-16 h-16" />
       </p>
-      <h1
-        class="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl"
-      >
+      <h1 class="mt-3 text-2xl font-semibold text-gray-800 md:text-3xl">
         Сторінка не знайдена
       </h1>
-      <p class="mt-4 text-gray-500 dark:text-gray-400">
+      <p class="mt-4 text-gray-500">
         Сторінка, яку ви шукаєте, не існує. Ось кілька корисних посилань:
       </p>
 

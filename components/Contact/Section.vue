@@ -1,77 +1,113 @@
 <script setup lang="ts">
+import { siteConfig } from '~/config/site'
+
 const contacts = [
   {
-    title: 'Телефон служби підтримки',
-    subtitle: 'Ми на зв’язку у робочий час',
-    description: `Пн–Пт: 9:00–17:00 (перерва 13:00–14:00)<br/>Сб: 9:00–15:00 (в телефонному режимі)<br/>Нд — вихідний`,
-    details: ['+38 (067) 93 610 73', '+38 (093) 93 610 73'],
-    icon: 'PhoneIcon',
+    title: 'Телефон підтримки',
+    subtitle: 'Ми на зв\'язку у робочий час',
+    description: siteConfig.workHours,
+    details: [...siteConfig.phones],
+    icon: 'i-heroicons-phone-20-solid',
     isLink: true,
   },
   {
     title: 'Електронна пошта',
     subtitle: 'Відповідаємо упродовж 24 годин',
-    details: ['tv.net@ukr.net'],
-    icon: 'EnvelopeIcon',
+    details: [siteConfig.email],
+    icon: 'i-heroicons-envelope-20-solid',
     isLink: true,
   },
   {
-    title: 'Фізична адреса офісу',
-    subtitle: 'Завітайте особисто або надішліть лист',
-    details: ['81750, м. Ходорів, вул. Шептицького, 9'],
-    icon: 'MapPinIcon',
+    title: 'Адреса офісу',
+    subtitle: 'Завітайте особисто',
+    details: [siteConfig.address],
+    icon: 'i-heroicons-map-pin-20-solid',
     isLink: false,
   },
+]
+
+const helpItems = [
+  { icon: 'i-heroicons-plus-circle-20-solid', text: 'Подача заявки на підключення до мережі' },
+  { icon: 'i-heroicons-chat-bubble-left-right-20-solid', text: 'Консультації щодо роботи провайдера' },
+  { icon: 'i-heroicons-megaphone-20-solid', text: 'Замовлення оголошення на «Інфоканалі»' },
+  { icon: 'i-heroicons-wrench-screwdriver-20-solid', text: 'Виклик фахівця для ремонту чи монтажу' },
 ]
 </script>
 
 <template>
-    <section class="bg-white dark:bg-gray-900">
-      <div class="container px-6 py-12 mx-auto">
-        <div>
-          <p class="font-medium text-blue-500 dark:text-blue-400">Зв’яжіться з нами</p>
-          <h1 class="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl dark:text-white">Ми на зв’язку</h1>
-          <p class="mt-3 text-gray-500 dark:text-gray-400">Наша команда з радістю допоможе вам.</p>
-        </div>
-  
-        <div class="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3">
-          <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-1">
-            <ContactItem
-              v-for="(contact, i) in contacts"
-              :key="i"
-              :title="contact.title"
-              :description="contact.description"
-              :details="contact.details"
-              :icon="contact.icon"
-            />
+  <div>
+    <!-- Intro -->
+    <div class="text-center mb-10">
+      <span class="inline-block text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-4">
+        Контакти
+      </span>
+      <h1 class="text-3xl font-bold text-slate-900 mb-2">Ми на зв'язку</h1>
+      <p class="text-slate-500">Наша команда з радістю допоможе вам</p>
+    </div>
+
+    <!-- Contact cards + Map -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-12">
+      <div class="flex flex-col gap-4">
+        <ContactItem
+          v-for="(contact, i) in contacts"
+          :key="i"
+          v-bind="contact"
+        />
+      </div>
+
+      <div class="lg:col-span-2">
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden h-full flex flex-col">
+          <div class="px-5 py-3 border-b border-slate-100 flex items-center gap-2">
+            <UIcon name="i-heroicons-map-20-solid" class="w-4 h-4 text-slate-400" />
+            <span class="text-sm font-medium text-slate-700">Наш офіс на карті</span>
           </div>
-  
-          <!-- Map -->
-          <div class="overflow-hidden rounded-lg lg:col-span-2 h-96 lg:h-auto">
+          <div class="flex-1 min-h-[320px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1298.1103473362468!2d24.304825538846732!3d49.40473199285285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDnCsDI0JzE3LjAiTiAyNMKwMTgnMjIuMCJF!5e0!3m2!1suk!2sit!4v1746451524648!5m2!1suk!2sit"
+              :src="siteConfig.mapEmbedUrl"
               width="100%"
               height="100%"
               allowfullscreen
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full"
             />
-
-            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Натисніть на мапу для навігації</p>
-
           </div>
         </div>
-  
-        <div class="mt-12 text-gray-700 dark:text-gray-300">
-          <h2 class="text-xl font-semibold mb-2">Ми можемо допомогти вам з:</h2>
-          <ul class="list-disc list-inside space-y-1">
-            <li>Подачею заявки на під’єднання до телекомунікаційної мережі.</li>
-            <li>Консультаціями щодо роботи провайдера та мережі.</li>
-            <li>Замовленням оголошення на «Інфоканалі».</li>
-            <li>Викликом фахівця для усунення поломок або монтажу додаткового обладнання.</li>
-          </ul>
+      </div>
+    </div>
+
+    <!-- Help items -->
+    <div class="mb-10">
+      <h2 class="text-lg font-bold text-slate-900 mb-4 text-center">Ми допоможемо вам з:</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div
+          v-for="item in helpItems"
+          :key="item.text"
+          class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3"
+        >
+          <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+            <UIcon :name="item.icon" class="w-4.5 h-4.5 text-blue-600" />
+          </div>
+          <span class="text-sm text-slate-700">{{ item.text }}</span>
         </div>
       </div>
-    </section>
-  </template>
-  
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="flex flex-col sm:flex-row items-center gap-5 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+      <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+        <UIcon name="i-heroicons-phone-arrow-up-right-20-solid" class="w-6 h-6 text-blue-600" />
+      </div>
+      <div class="text-center sm:text-left flex-1">
+        <h3 class="text-base font-bold text-slate-900">Потрібна допомога прямо зараз?</h3>
+        <p class="text-sm text-slate-500 mt-0.5">Зателефонуйте — ми відповімо у робочий час</p>
+      </div>
+      <a
+        :href="`tel:${siteConfig.phones[0].replace(/\s/g, '')}`"
+        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors shrink-0"
+      >
+        {{ siteConfig.phones[0] }}
+      </a>
+    </div>
+  </div>
+</template>

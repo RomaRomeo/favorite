@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { siteConfig } from '~/config/site'
+
 const links = [
   {
     title: "Продукти",
@@ -11,43 +13,62 @@ const links = [
   {
     title: "Налаштування",
     links: [
-      { label: "Компʼютера", url: "/config/windows" },
+      { label: "Комп'ютера", url: "/config/windows" },
       { label: "Роутера", url: "/config/routers" },
     ],
   },
   {
     title: "Підтримка",
     links: [
-      { label: "Центр підтримки", url: "/contact/" },
-      { label: "Спосіб оплати", url: "/payment" },
+      { label: "Контакти", url: "/contact" },
+      { label: "Оплата", url: "/payment" },
+      { label: "FAQ", url: "/faq" },
     ],
   },
   {
     title: "Контакти",
-    links: [
-      { label: "+38 (067) 93 610 73" }, 
-      { label: "+38 (093) 93 610 73" }],
+    links: siteConfig.phones.map((phone) => ({ label: phone })),
   },
 ];
+
+const socials = [
+  { name: 'Facebook', link: siteConfig.social.facebook, component: 'BaseIconSocialFacebook' },
+  { name: 'Viber', link: siteConfig.social.viber, component: 'BaseIconSocialViber' },
+  { name: 'Telegram', link: siteConfig.social.telegram, component: 'BaseIconSocialTelegram' },
+]
 </script>
 
 <template>
   <BaseFooter>
     <template #left>
-      <NuxtLink to="/">
+      <NuxtLink to="/" class="inline-block">
         <img
-          src="/public/images/logo/logo-dark.png"
-          width="160"
+          src="/images/logo/logo-white.png"
+          width="148"
           aria-label="Favorite logo"
           alt="Favorite logo"
         />
       </NuxtLink>
 
-      <p class="max-w-sm mt-2 text-gray-500 dark:text-gray-400 text-xs">
-        Connecting You to the World.
+      <p class="mt-3 text-sm text-slate-500 max-w-xs leading-relaxed">
+        Інтернет-провайдер у Ходорові та регіоні. Швидкий інтернет, цифрове та кабельне телебачення.
       </p>
 
-      <BaseMessengerButtonList size="sm" class="mt-6 gap-2" />
+      <div class="flex items-center gap-3 mt-6">
+        <a
+          v-for="s in socials"
+          :key="s.name"
+          :href="s.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          :aria-label="s.name"
+          class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors duration-200"
+        >
+          <BaseIconSocialFacebook v-if="s.name === 'Facebook'" class="w-4 h-4 text-slate-400" />
+          <BaseIconSocialViber v-if="s.name === 'Viber'" class="w-4 h-4 text-slate-400" />
+          <BaseIconSocialTelegram v-if="s.name === 'Telegram'" class="w-4 h-4 text-slate-400" />
+        </a>
+      </div>
     </template>
 
     <template #middle>

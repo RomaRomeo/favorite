@@ -14,33 +14,32 @@ const emit = defineEmits(["onCardClick"]);
 </script>
 
 <template>
-  <div class="w-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-    <img class="object-cover w-full h-64" :src="props.image" alt="Article Image"/>
+  <button
+    class="group w-full text-left bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+    @click="emit('onCardClick')"
+  >
+    <div class="relative overflow-hidden">
+      <img
+        class="object-cover w-full h-52 transition-transform duration-300 group-hover:scale-105"
+        :src="props.image"
+        :alt="props.title"
+      />
+      <span class="absolute top-3 left-3 text-[11px] font-semibold uppercase tracking-wider text-blue-600 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full">
+        {{ props.category }}
+      </span>
+    </div>
 
-    <div class="p-6">
-      <div>
-        <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">
-          {{ props.category }}
-        </span>
-        <a
-          href="#"
-          class="block mt-2 text-xl font-semibold text-gray-800 dark:text-white hover:text-gray-600 hover:underline"
-          @click="$emit('onCardClick')"
-        >
-          {{ props.title }}
-        </a>
-        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-          {{ props.description }}
-        </p>
-      </div>
-
-      <div v-if="props.author" class="mt-4 flex items-center">
-        <img class="object-cover h-10 rounded-full" :src="props.author.avatar" alt="Author Avatar" />
-        <a href="#" class="mx-2 font-semibold text-gray-700 dark:text-gray-200">
-          {{ props.author.name }}
-        </a>
-        <span class="mx-1 text-xs text-gray-600 dark:text-gray-300">{{ props.date }}</span>
+    <div class="p-5">
+      <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-blue-600 transition-colors">
+        {{ props.title }}
+      </h3>
+      <p class="mt-2 text-sm text-slate-500 line-clamp-2">
+        {{ props.description }}
+      </p>
+      <div class="mt-4 flex items-center gap-1.5 text-sm font-medium text-blue-600 group-hover:gap-2.5 transition-all duration-200">
+        <span>Відкрити інструкцію</span>
+        <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4" />
       </div>
     </div>
-  </div>
+  </button>
 </template>

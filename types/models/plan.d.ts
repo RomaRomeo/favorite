@@ -1,4 +1,4 @@
-interface IResponseInternetPlan {
+interface Plan {
   id: string;
   name: string;
   description: string;

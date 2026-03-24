@@ -1,42 +1,84 @@
+<script setup lang="ts">
+useSeoMeta({
+  title: 'Цифрове ТБ (IPTV) Sweet TV',
+  description: 'Цифрове телебачення Sweet TV від Фаворит ТВ/НЕТ. Понад 260 каналів у HD-якості, онлайн-кінотеатри, перегляд на будь-якому пристрої.',
+  ogTitle: 'Цифрове ТБ Sweet TV | Фаворит ТВ/НЕТ',
+  ogDescription: 'Понад 260 каналів у HD-якості. Гнучкі тарифи без прихованих платежів.',
+  ogImage: '/images/logo/logo-dark.png',
+})
+
+const benefits = [
+  {
+    icon: 'i-heroicons-signal-20-solid',
+    title: 'Більше 260 каналів',
+    description: 'HD та преміум-контент від найкращих провайдерів телебачення.',
+  },
+  {
+    icon: 'i-heroicons-film-20-solid',
+    title: 'Онлайн-кінотеатри',
+    description: 'Доступ до ексклюзивного контенту та нових фільмів.',
+  },
+  {
+    icon: 'i-heroicons-banknotes-20-solid',
+    title: 'Гнучкі тарифи',
+    description: 'Прозорі ціни без прихованих платежів та комісій.',
+  },
+  {
+    icon: 'i-heroicons-device-phone-mobile-20-solid',
+    title: 'Будь-який пристрій',
+    description: 'Смартфон, планшет, Smart TV — дивіться де зручно.',
+  },
+]
+</script>
+
 <template>
-  <UContainer title="Sweet tv">
-    <h2 class="text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
-      Тарифи цифрового телебачення Sweet TV
+  <UContainer class="pt-10 md:pt-12 pb-16">
+    <h2 class="text-3xl font-bold text-slate-900 mb-3">
+      Цифрове телебачення Sweet TV
     </h2>
-    <USeparator orientation="horizontal" class="my-8" />
-
-    <p class="text-lg text-gray-500 dark:text-gray-300 mb-10">
-      Відкрийте світ якісного цифрового телебачення разом із
-      <span class="font-bold">Sweet TV</span>! Обирайте тарифний план, що
-      підходить саме вам, та насолоджуйтесь сотнями каналів у HD-якості. Вигідні
-      умови від вашого локального провайдера – без прихованих платежів!
+    <p class="text-lg text-slate-500 max-w-2xl mb-10">
+      Обирайте тарифний план та насолоджуйтесь сотнями каналів у HD-якості.
+      Вигідні умови від вашого локального провайдера.
     </p>
-    <BaseFrame src="https://sweet.tv/widget/4" class="mb-8" />
 
-    <USeparator orientation="horizontal" class="my-8" />
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden mb-12">
+      <BaseFrame src="https://sweet.tv/widget/4" />
+    </div>
 
-    <div class="mb-10">
-      <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-        Чому варто обрати Sweet TV?
-      </h2>
-      <ul class="text-gray-700 dark:text-gray-300 space-y-2">
-        <li class="flex item-center gap-2">
-          <UIcon name="hugeicons:internet-antenna-04" class="w-5 h-5" />
-          <span class="font-bold">Більше 260 каналів</span>, включаючи HD та преміум-контент
-        </li>
-        <li class="flex item-center gap-2">
-          <UIcon name="streamline:film-slate" class="w-5 h-5" />
-          <span class="font-bold">Доступ до онлайн-кінотеатрів</span> та ексклюзивного контенту
-        </li>
-        <li class="flex item-center gap-2">
-          <UIcon name="hugeicons:money-bag-02" class="w-5 h-5" />
-          <span class="font-bold">Гнучкі тарифи</span> без прихованих платежів
-        </li>
-        <li class="flex item-center gap-2">
-          <UIcon name="ic:baseline-phone-android" class="w-5 h-5" />
-          <span class="font-bold">Перегляд на будь-якому пристрої</span> – смартфон, планшет, Smart TV
-        </li>
-      </ul>
+    <div class="mb-12">
+      <div class="text-center mb-8">
+        <span class="inline-block text-xs font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-3">
+          Переваги
+        </span>
+        <h3 class="text-2xl font-bold text-slate-900">
+          Чому варто обрати Sweet TV?
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div
+          v-for="item in benefits"
+          :key="item.title"
+          class="flex gap-4 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+        >
+          <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+            <UIcon :name="item.icon" class="w-5 h-5 text-blue-600" />
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-900 mb-1">{{ item.title }}</h4>
+            <p class="text-sm text-slate-500 leading-relaxed">{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <UButton
+        label="Подати заявку на підключення"
+        to="/contact"
+        size="xl"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8"
+      />
     </div>
   </UContainer>
 </template>

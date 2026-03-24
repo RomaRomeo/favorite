@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute inset-0 w-full h-full bg-gray-300 dark:bg-gray-600 rounded-lg shadow-md animate-pulse" />
+  <div class="absolute inset-0 w-full h-full bg-gray-300 rounded-lg shadow-md animate-pulse" />
 </template>
 
 <style scoped>

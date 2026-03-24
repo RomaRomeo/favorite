@@ -1,38 +1,36 @@
 <script setup lang="ts">
-import { formatInternetPlan } from "~/services/format/internet-plan";
 import { ModalPlansSubmit } from "#components";
+
+useSeoMeta({
+  title: 'Тарифні плани Інтернет',
+  description: 'Тарифи на інтернет у Ходорові та регіоні від 200 грн/міс. Швидкість до 1 Гбіт/с. Безлімітний трафік.',
+  ogTitle: 'Тарифні плани Інтернет | Фаворит ТВ/НЕТ',
+  ogDescription: 'Оберіть оптимальний тариф для інтернету. Швидкість до 1 Гбіт/с від 200 грн/міс.',
+  ogImage: '/images/logo/logo-dark.png',
+})
 
 const modal = useModal();
 const selectedCategory = ref("ходорів");
-const { data, error, status } = useFetch<{ data: IResponseInternetPlan[] }>(
-  "/json/internet-plans.json",
-  { method: "GET", server: false }
-);
+const { data, error, status } = await useFetch<{ data: Plan[] }>("/json/internet-plans.json");
 
-const plans = computed(() =>
-  data.value ? formatInternetPlan(data.value.data) : []
-);
-const filteredPlans = computed(() =>
-  plans.value.filter((p) => p.category === selectedCategory.value)
-);
-const categories = computed(() => [
-  ...new Set(plans.value.map((plan) => plan.category)),
-]);
+const plans = computed(() => data.value?.data ?? []);
+const filteredPlans = computed(() => plans.value.filter((p) => p.category === selectedCategory.value));
+const categories = computed(() => [...new Set(plans.value.map((plan) => plan.category))]);
 
-function onSelectInternetPlanClick(plan: InternetPlan) {
+function onSelectInternetPlanClick(plan: Plan) {
   modal.open(ModalPlansSubmit, plan);
 }
 </script>
 
 <template>
-  <UContainer>
-    <h2 class="text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+  <UContainer class="pt-10 md:pt-12 pb-16">
+    <h2 class="text-3xl font-semibold text-slate-900 mb-4">
       Тарифні плани для інтернету
     </h2>
 
     <USeparator orientation="horizontal" class="my-8" />
 
-    <p class="text-lg text-gray-500 dark:text-gray-300 mb-10">
+    <p class="text-lg text-slate-500 mb-10">
       Оберіть оптимальний тариф для вашого використання інтернету. Ми пропонуємо
       різні варіанти швидкості та ціни для кожного користувача.
     </p>
@@ -41,14 +39,14 @@ function onSelectInternetPlanClick(plan: InternetPlan) {
       v-if="categories.length"
       v-model="selectedCategory"
       :options="categories"
-      class="mb-10"
+      class="mb-12"
     />
 
     <BaseList
       :items="filteredPlans"
       :loading="status === 'idle' || status === 'pending'"
       :error="error?.message"
-      list-class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+      list-class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
     >
       <template #item="{ item }">
         <CardPlan

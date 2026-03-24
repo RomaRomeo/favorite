@@ -3,13 +3,15 @@ const props = defineProps<{
   type: string;
 }>();
 
+const modal = useModal();
+
 const guides = {
   "windows-xp": {
     title: "Налаштування PPPoE підключення на Windows XP",
     description: "Покрокова інструкція для створення підключення PPPoE у Windows XP.",
     steps: [
       {
-        hideStepper: false, // fixed error in template
+        hideStepper: false,
         image: "/images/guides/windows-xp/step1.jpg",
         description: "На робочому столі відкрийте 'Мій комп'ютер', а в ньому 'Панель керування'. Тут відкривайте 'Мережеві підключення'",
       },
@@ -53,7 +55,7 @@ const guides = {
       {
         image: "/images/guides/windows7/step1.png",
         description: "Натисніть кнопку 'Пуск', потім відкрийте 'Панель керування'.",
-        hideStepper: false // fixed error in template
+        hideStepper: false,
       },
       {
         image: "/images/guides/windows7/step2.png",
@@ -77,7 +79,7 @@ const guides = {
       },
       {
         image: "/images/guides/windows7/step7.png",
-        description: "У формі введіть ваш логін і пароль. Поставте галочку 'Запам’ятати цей пароль'. Назву підключення можна залишити без змін. Натисніть 'Підключити'.",
+        description: "У формі введіть ваш логін і пароль. Поставте галочку 'Запам'ятати цей пароль'. Назву підключення можна залишити без змін. Натисніть 'Підключити'.",
       },
       {
         image: "/images/guides/windows7/step8.png",
@@ -100,11 +102,11 @@ const guides = {
       {
         image: "/images/guides/windows10/step1.png",
         description: "Правою кнопкою миші натисніть 'Пуск' та виберіть 'Мережеві підключення'.",
-        hideStepper: false // fixed error in template
+        hideStepper: false,
       },
       {
         image: "/images/guides/windows10/step2.png",
-        description: "У розділі 'Комутоване з’єднання' натисніть 'Установити нове підключення'.",
+        description: "У розділі 'Комутоване з'єднання' натисніть 'Установити нове підключення'.",
       },
       {
         image: "/images/guides/windows10/step3.png",
@@ -116,11 +118,11 @@ const guides = {
       },
       {
         image: "/images/guides/windows10/step5.png",
-        description: "У формі введіть логін і пароль. Поставте галочку 'Запам’ятати цей пароль'. Назву підключення можна залишити без змін. Натисніть 'Підключити'.",
+        description: "У формі введіть логін і пароль. Поставте галочку 'Запам'ятати цей пароль'. Назву підключення можна залишити без змін. Натисніть 'Підключити'.",
       },
       {
         image: "/images/guides/windows10/step6.png",
-        description: "Якщо з’явиться помилка, натисніть 'Усе одно встановити підключення'.",
+        description: "Якщо з'явиться помилка, натисніть 'Усе одно встановити підключення'.",
       },
       {
         image: "/images/guides/windows10/step7.png",
@@ -128,11 +130,11 @@ const guides = {
       },
       {
         image: "/images/guides/windows10/step8.png",
-        description: "У розділі 'Комутоване з’єднання' з’явиться новостворене підключення.",
+        description: "У розділі 'Комутоване з'єднання' з'явиться новостворене підключення.",
       },
     ],
   },
-"windows-11": {
+  "windows-11": {
     title: "Налаштування PPPoE підключення на Windows 11",
     description: "Покрокова інструкція для створення підключення PPPoE у Windows 11.",
     steps: [
@@ -146,7 +148,7 @@ const guides = {
       },
       {
         image: "/images/guides/windows11/step3.png",
-        description: "Виберіть розділ 'Комутоване з’єднання'.",
+        description: "Виберіть розділ 'Комутоване з'єднання'.",
       },
       {
         image: "/images/guides/windows11/step4.png",
@@ -169,44 +171,76 @@ const guides = {
       },
       {
         image: "/images/guides/windows11/step9.png",
-        hideStepper: true
+        hideStepper: true,
       },
       {
         image: "/images/guides/windows11/step10.png",
-        description: "Після підключення, якщо Інтернет недоступний, обов’язково зверніться до технічної підтримки.",
-        hideStepper: true
+        description: "Після підключення, якщо Інтернет недоступний, обов'язково зверніться до технічної підтримки.",
+        hideStepper: true,
       },
     ],
   },
 };
+
 const guide = computed(() => guides[props.type as keyof typeof guides]);
+
+const visibleSteps = computed(() => {
+  let stepNum = 0;
+  return (guide.value?.steps ?? []).map((step) => {
+    if (!step.hideStepper) stepNum++;
+    return { ...step, stepNum: step.hideStepper ? null : stepNum };
+  });
+});
 </script>
 
 <template>
-  <UModal
-  class="!max-w-[900px]"
-  :title="guide?.title"
-  :description="guide?.description"
->
-  <template #body>
-    <div class="flex flex-col space-y-8 max-h-[70vh] overflow-y-auto">
-      <div
-        v-for="(step, index) in guide?.steps"
-        :key="index"
-        class="flex flex-col items-center space-y-2"
-      >
-        <div v-if="!step.hideStepper" class="text-lg font-semibold text-primary">Крок {{ index + 1 }}</div>
-        <img
-          v-if="step.image"
-          :src="step.image"
-          alt="Крок налаштування"
-          class="max-w-full rounded-xl shadow-md"
+  <UModal class="!max-w-[900px]">
+    <template #header>
+      <div class="flex items-center gap-4 w-full">
+        <div class="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+          <UIcon name="i-heroicons-cog-6-tooth-20-solid" class="w-5 h-5 text-white" />
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="text-lg font-bold text-slate-900 leading-tight">{{ guide?.title }}</h2>
+          <p class="text-sm text-slate-500 mt-0.5">{{ guide?.description }}</p>
+        </div>
+        <UButton
+          icon="line-md:menu-to-close-transition"
+          color="neutral"
+          variant="ghost"
+          size="sm"
+          class="shrink-0"
+          @click="modal.close()"
         />
-        <p class="text-center text-gray-700 max-w-md">
-          {{ step.description }}
-        </p>
       </div>
-    </div>
-  </template>
-</UModal>
+    </template>
+
+    <template #body>
+      <div class="space-y-6 max-h-[70vh] overflow-y-auto px-1 py-2">
+        <div
+          v-for="(step, index) in visibleSteps"
+          :key="index"
+          class="bg-slate-50 border border-slate-200 rounded-xl p-5"
+        >
+          <div v-if="step.stepNum" class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold">
+              {{ step.stepNum }}
+            </span>
+            <span class="text-sm font-semibold text-slate-900">Крок {{ step.stepNum }}</span>
+          </div>
+
+          <img
+            v-if="step.image"
+            :src="step.image"
+            alt="Крок налаштування"
+            class="w-full rounded-lg border border-slate-200 shadow-sm mb-3"
+          />
+
+          <p v-if="step.description" class="text-sm text-slate-600 leading-relaxed">
+            {{ step.description }}
+          </p>
+        </div>
+      </div>
+    </template>
+  </UModal>
 </template>
