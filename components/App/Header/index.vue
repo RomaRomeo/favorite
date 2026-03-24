@@ -46,7 +46,7 @@ function isActive(to?: string) {
   <BaseHeader>
     <template #logo>
       <NuxtLink to="/">
-        <img src="/images/logo/logo-dark.png" width="148" aria-label="Favorite logo" alt="Favorite logo" />
+        <img src="/images/logo/logo_new.png" width="148" aria-label="Favorite logo" alt="Favorite logo" />
       </NuxtLink>
     </template>
 
