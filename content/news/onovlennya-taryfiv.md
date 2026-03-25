@@ -1,5 +1,5 @@
 ---
-title: "Оновлення тарифів для абонентів"
+title: "Оновлення тарифів для абонентів!"
 date: "2024-03-04"
 category: "Оголошення"
 image: "/images/news/tariff-update.jpg"
