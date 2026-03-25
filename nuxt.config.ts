@@ -11,6 +11,16 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light'
   },
+  experimental: {
+    payloadExtraction: false,
+  },
+  routeRules: {
+    '/': { prerender: true },
+    '/news': { prerender: true },
+    '/news/**': { prerender: true },
+    '/promo': { prerender: true },
+    '/promo/**': { prerender: true },
+  },
   vite: {
     optimizeDeps: {
       include: [
