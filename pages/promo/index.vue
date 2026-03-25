@@ -4,7 +4,7 @@ useSeoMeta({
   description: 'Актуальні акції від Фаворит ТВ/НЕТ. Знижки на підключення, бонуси для нових абонентів та спеціальні пропозиції.',
   ogTitle: 'Акції | Фаворит ТВ/НЕТ',
   ogDescription: 'Знижки на підключення, бонуси та спеціальні пропозиції від інтернет-провайдера Фаворит.',
-  ogImage: '/images/logo/logo_dark.png',
+  ogImage: '/images/logo/logo.png',
 })
 
 const { data: posts } = await useAsyncData('promo', () =>

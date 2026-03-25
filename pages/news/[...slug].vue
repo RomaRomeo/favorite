@@ -11,7 +11,7 @@ useSeoMeta({
   description: post.value.description || `${post.value.title} — Фаворит ТВ/НЕТ`,
   ogTitle: post.value.title,
   ogDescription: post.value.description || `${post.value.title} — Фаворит ТВ/НЕТ`,
-  ogImage: post.value.image || '/images/logo/logo_dark.png',
+  ogImage: post.value.image || '/images/logo/logo.png',
   ogType: 'article',
 })
 </script>

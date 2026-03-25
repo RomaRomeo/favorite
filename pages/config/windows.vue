@@ -7,7 +7,7 @@ useSeoMeta({
   description: 'Покрокові інструкції з налаштування PPPoE підключення у Windows 11, 10, 7 та XP від Фаворит ТВ/НЕТ.',
   ogTitle: 'Налаштування PPPoE у Windows | Фаворит ТВ/НЕТ',
   ogDescription: 'Детальні інструкції з налаштування інтернет-підключення PPPoE у Windows.',
-  ogImage: '/images/logo/logo_dark.png',
+  ogImage: '/images/logo/logo.png',
 })
 
 const modal = useModal();

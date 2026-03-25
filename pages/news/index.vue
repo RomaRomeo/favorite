@@ -4,7 +4,7 @@ useSeoMeta({
   description: 'Останні новини та оголошення від Фаворит ТВ/НЕТ. Оновлення тарифів, нові послуги та важлива інформація для абонентів.',
   ogTitle: 'Оголошення | Фаворит ТВ/НЕТ',
   ogDescription: 'Останні новини та оголошення від інтернет-провайдера Фаворит.',
-  ogImage: '/images/logo/logo_dark.png',
+  ogImage: '/images/logo/logo.png',
 })
 
 const { data: posts } = await useAsyncData('news', () => queryCollection('news').order('date', 'DESC').all())

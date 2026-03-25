@@ -7,7 +7,7 @@ useSeoMeta({
   description: 'Тарифи на інтернет у Ходорові та регіоні від 200 грн/міс. Швидкість до 1 Гбіт/с. Безлімітний трафік.',
   ogTitle: 'Тарифні плани Інтернет | Фаворит ТВ/НЕТ',
   ogDescription: 'Оберіть оптимальний тариф для інтернету. Швидкість до 1 Гбіт/с від 200 грн/міс.',
-  ogImage: '/images/logo/logo_dark.png',
+  ogImage: '/images/logo/logo.png',
 })
 
 const modal = useModal();

@@ -7,7 +7,7 @@ useSeoMeta({
   description: 'Тарифи кабельного телебачення від Фаворит ТВ/НЕТ у Ходорові. 100 каналів від 100 грн/міс.',
   ogTitle: 'Кабельне ТБ | Фаворит ТВ/НЕТ',
   ogDescription: 'Кабельне телебачення у Ходорові. 100 каналів від 100 грн/міс.',
-  ogImage: '/images/logo/logo_dark.png',
+  ogImage: '/images/logo/logo.png',
 })
 
 const modal = useModal();
