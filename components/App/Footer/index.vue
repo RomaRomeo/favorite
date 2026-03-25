@@ -43,7 +43,7 @@ const socials = [
     <template #left>
       <NuxtLink to="/" class="inline-block">
         <img
-          src="/images/logo/logo_new_light.png"
+          src="/images/logo/logo_light.png"
           width="148"
           aria-label="Favorite logo"
           alt="Favorite logo"
