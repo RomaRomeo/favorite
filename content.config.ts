@@ -7,6 +7,7 @@ export default defineContentConfig({
       source: 'news/**',
       schema: z.object({
         date: z.string(),
+        description: z.string().optional(),
         category: z.string().optional(),
         image: z.string().optional(),
       }),
@@ -16,6 +17,7 @@ export default defineContentConfig({
       source: 'promo/**',
       schema: z.object({
         date: z.string(),
+        description: z.string().optional(),
         category: z.string().optional(),
         categoryUrl: z.string().optional(),
         image: z.string().optional(),

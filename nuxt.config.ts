@@ -12,7 +12,7 @@ function getContentSlugs(collection: string): string[] {
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: process.env.NODE_ENV !== 'production' },
-  modules: ['@nuxt/ui', '@nuxtjs/sitemap', '@nuxt/image', '@nuxt/content'],
+  modules: ['@nuxt/ui', '@nuxtjs/sitemap', '@nuxt/image', '@nuxt/content', 'nuxt-studio'],
   css: ['~/assets/css/main.css'],
   site: {
     url: 'https://favorite.lviv.ua',
@@ -40,6 +40,18 @@ export default defineNuxtConfig({
         ...getContentSlugs('news'),
         ...getContentSlugs('promo'),
       ],
+    },
+  },
+  studio: {
+    repository: {
+      provider: 'github',
+      owner: 'RomaRomeo',
+      repo: 'favorite-3',
+      branch: 'master',
+    },
+    i18n: { defaultLocale: 'ua' },
+    git: {
+      commit: { messagePrefix: 'content:' },
     },
   },
   vite: {
