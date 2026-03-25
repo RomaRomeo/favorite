@@ -1,12 +1,13 @@
 ---
-title: "Акція «Приведи друга»"
-date: "2024-03-20"
-category: "Інтернет"
-categoryUrl: "/internet"
-image: "/images/news/refer-friend.jpg"
+title: Акція «Приведи друга»
+category: Інтернет
+categoryUrl: /internet
+date: 2024-03-20
+description: Рекомендуйте — отримуйте бонуси!
+image: /images/news/refer-friend.jpg
 ---
 
-Рекомендуйте — отримуйте бонуси!
+Рекомендуйте — отримуйте бонуси!!!
 
 Приведіть друга — отримайте 1 місяць безкоштовного інтернету.
 
