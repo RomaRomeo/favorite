@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { siteConfig } from '~/config/site'
+import { paymentFaq } from '~/data/payment-faq'
 
 useSeoMeta({
   title: 'Оплата',
@@ -15,11 +16,7 @@ const qrCodeLink = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&dat
 
 const selected = ref<'privat' | 'easypay' | null>(null)
 
-const { data: faqData } = await useAsyncData('payment-faq', () =>
-  $fetch<{ data: any[] }>('/json/payment-faq.json'),
-  { default: () => ({ data: [] as any[] }) },
-)
-const items = computed(() => faqData.value?.data ?? [])
+const items = paymentFaq
 </script>
 
 <template>

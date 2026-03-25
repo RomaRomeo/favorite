@@ -30,10 +30,8 @@ npm run generate   # static generation
 pages/              Pages (file-based routing)
 components/         Vue components (auto-imported by folder nesting)
 content/            Markdown content for @nuxt/content (news, promo)
-data/               TypeScript files with plan pricing data
-public/             Static assets: images, SVG, JSON files
-public/json/        JSON data served via server route (settlements, FAQ, config guides)
-server/routes/      Server API routes (Nitro)
+data/               TypeScript files with structured site data (plans, settlements, FAQ, guides)
+public/             Static assets: images, SVG
 config/             Site configuration (site.ts)
 layouts/            Nuxt layouts (default + default-wrapper)
 assets/css/         Global styles
@@ -45,15 +43,13 @@ assets/css/         Global styles
 - `content/news/` -- announcements
 - `content/promo/` -- promotions
 
-**`data/`** -- TypeScript arrays with pricing plans. Imported directly into pages.
+**`data/`** -- TypeScript arrays with structured site data. Imported directly into pages and components.
 - `data/internet-plans.ts` -- internet plans
 - `data/cable-plans.ts` -- cable TV plans
-
-**`public/json/`** -- JSON files served through the `/json/*` server route:
-- `settlements.json` -- list of settlements (for the selector dropdown)
-- `payment-faq.json` -- payment FAQ
-- `config-routers.json` -- router models for setup guides
-- `config-windows.json` -- Windows versions for setup guides
+- `data/settlements.ts` -- list of settlements (for the selector dropdown)
+- `data/payment-faq.ts` -- payment FAQ
+- `data/config-routers.ts` -- router models for setup guides
+- `data/config-windows.ts` -- Windows versions for setup guides
 
 ## Pages
 
@@ -82,16 +78,6 @@ Used in two places:
 Both send a POST to `https://forminit.com/f/bejrjqda`.
 To change the endpoint, search for `forminit` in these two files.
 
-## JSON API
-
-Server route `server/routes/json/[...path].get.ts` serves JSON files from `public/json/` as parsed JSON.
-
-Consumers:
-- `components/Selector/Settlements.vue` -> `GET /json/settlements.json`
-- `pages/payment.vue` -> `GET /json/payment-faq.json`
-- `pages/config/routers.vue` -> `GET /json/config-routers.json`
-- `pages/config/windows.vue` -> `GET /json/config-windows.json`
-
 ## Deployment
 
 The project runs as SSR (Nitro server):
@@ -109,5 +95,5 @@ Alternatively, use `npm run generate` for full static generation.
 - Internet plans: `data/internet-plans.ts`
 - Cable TV plans: `data/cable-plans.ts`
 - News/promotions: `content/news/`, `content/promo/` (Markdown with frontmatter)
-- Settlements list: `public/json/settlements.json`
+- Settlements list: `data/settlements.ts`
 - Devtools are enabled in development only (`nuxt.config.ts`)

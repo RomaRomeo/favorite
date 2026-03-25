@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ModalWindowsConfig } from "#components";
+import { configWindows } from "~/data/config-windows";
 
 useSeoMeta({
   title: 'Налаштування PPPoE у Windows',
@@ -11,8 +12,7 @@ useSeoMeta({
 
 const modal = useModal();
 
-const { data } = await useFetch<{ data: any[] }>('/json/config-windows.json')
-const articles = computed(() => data.value?.data ?? [])
+const articles = configWindows
 
 function onSelectInternetPlanClick(id: string) {
   modal.open(ModalWindowsConfig, { type: id });

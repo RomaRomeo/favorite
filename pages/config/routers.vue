@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ModalRouterConfig } from "#components";
+import { configRouters } from "~/data/config-routers";
 
 useSeoMeta({
   title: 'Налаштування роутерів',
@@ -11,8 +12,7 @@ useSeoMeta({
 
 const modal = useModal();
 
-const { data } = await useFetch<{ data: any[] }>('/json/config-routers.json')
-const articles = computed(() => data.value?.data ?? [])
+const articles = configRouters
 
 function onSelectRouterClick(id: string) {
   modal.open(ModalRouterConfig, { type: id });

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { settlements } from '~/data/settlements'
+
 const props = withDefaults(defineProps<{
   modelValue?: string;
   variant?: "outline" | "subtle" | "soft" | "ghost" | "none";
@@ -20,13 +22,10 @@ const updateValue = (newValue: string) => {
   emit('update:modelValue', newValue);
 };
 
-const { data: settlements } = await useFetch<{ data: string[] }>("/json/settlements.json");
-
 const formattedSettlements = computed(() => {
-  const all = settlements.value?.data ?? [];
-  if (props.mode === 'only-khodoriv') return all.filter(i => i === 'Ходорів');
-  if (props.mode === 'exclude-khodoriv') return all.filter(i => i !== 'Ходорів');
-  return all;
+  if (props.mode === 'only-khodoriv') return settlements.filter(i => i === 'Ходорів');
+  if (props.mode === 'exclude-khodoriv') return settlements.filter(i => i !== 'Ходорів');
+  return settlements;
 });
 </script>
 

@@ -1,0 +1,27 @@
+export interface ConfigArticle {
+  id: string
+  image: string
+  title: string
+  description: string
+  category: string
+  date: string
+}
+
+export const configRouters: ConfigArticle[] = [
+  {
+    image: "/images/banners/router_tp_link.jpg",
+    title: "Налаштування роутера TP-Link WR841N",
+    description: "Покрокова інструкція з налаштування Wi-Fi роутера TP-Link WR841N: як підключити пристрій, зайти в панель керування, налаштувати інтернет-з'єднання та забезпечити безпеку мережі.",
+    category: "Інтернет та мережі",
+    date: "04 Травня 2025",
+    id: "tp-link",
+  },
+  {
+    image: "/images/banners/router_netis.jpg",
+    title: "Налаштування роутера Netis WF2411",
+    description: "Детальна інструкція з налаштування роутера Netis WF2411: як підключити пристрій, увійти в веб-інтерфейс, встановити параметри інтернету та Wi-Fi, а також захистити мережу паролем.",
+    category: "Інтернет та мережі",
+    date: "04 Травня 2025",
+    id: "netis",
+  },
+]
