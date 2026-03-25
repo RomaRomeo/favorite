@@ -1,3 +1,13 @@
+import { readdirSync } from 'node:fs'
+import { resolve } from 'node:path'
+
+function getContentSlugs(collection: string): string[] {
+  const dir = resolve(__dirname, 'content', collection)
+  return readdirSync(dir)
+    .filter(f => f.endsWith('.md'))
+    .map(f => `/${collection}/${f.replace(/\.md$/, '')}`)
+}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
@@ -20,6 +30,17 @@ export default defineNuxtConfig({
     '/news/**': { prerender: true },
     '/promo': { prerender: true },
     '/promo/**': { prerender: true },
+  },
+  nitro: {
+    prerender: {
+      routes: [
+        '/',
+        '/news',
+        '/promo',
+        ...getContentSlugs('news'),
+        ...getContentSlugs('promo'),
+      ],
+    },
   },
   vite: {
     optimizeDeps: {
