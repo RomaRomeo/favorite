@@ -60,9 +60,10 @@ function isActive(to?: string) {
         :to="siteConfig.personalCabinet"
         target="_blank"
         icon="line-md:account"
-        color="primary"
-        variant="soft"
-        size="md"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        class="font-medium"
       />
     </template>
 

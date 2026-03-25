@@ -29,7 +29,7 @@ const formSuccess = ref(false)
 async function submitForm() {
   formLoading.value = true
   try {
-    await $fetch('https://getform.io/f/ayvkkqqb', {
+    await $fetch('https://forminit.com/f/bejrjqda', {
       method: 'POST',
       body: { ...form },
       headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
@@ -59,59 +59,90 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
 <template>
   <div>
     <!-- Hero -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-cyan-900">
+    <section class="relative overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-cyan-950">
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px]" />
-        <div class="absolute -bottom-32 -left-32 w-[400px] h-[400px] bg-cyan-400/15 rounded-full blur-[100px]" />
+        <div class="absolute -top-48 -right-48 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[150px]" />
+        <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[130px]" />
+        <div class="absolute top-1/2 left-1/3 w-[600px] h-[600px] bg-blue-600/[0.04] rounded-full blur-[180px]" />
       </div>
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
 
       <UContainer class="relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 items-center py-20 lg:py-28">
-          <div>
-            <h1 class="text-4xl lg:text-5xl font-bold text-white leading-tight">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-20 lg:pt-28 pb-32 lg:pb-40">
+          <div class="max-w-xl">
+            <h1 class="text-4xl lg:text-[3.25rem] font-extrabold text-white leading-[1.1] tracking-tight">
               Швидкий інтернет у Ходорові та регіоні
             </h1>
-            <p class="mt-6 text-lg text-blue-100/80 max-w-lg">
+            <p class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md">
               Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Підключення від 200 грн/міс.
             </p>
-            <div class="flex flex-wrap gap-4 mt-8">
-              <UButton label="Обрати тариф" to="/internet" size="xl" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8" />
-              <UButton label="Зв'язатися" to="/contact" size="xl" variant="outline" class="border-white/30 text-white hover:bg-white/10" />
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-10">
+              <UButton
+                label="Обрати тариф"
+                to="/internet"
+                size="xl"
+                class="!rounded-xl !border-0 !bg-gradient-to-r !from-blue-600 !via-sky-500 !to-cyan-500 !text-white !font-semibold !px-10 !shadow-lg !shadow-cyan-500/25 !ring-1 !ring-white/20 hover:!-translate-y-0.5 hover:!shadow-xl hover:!shadow-cyan-400/35 active:!translate-y-0 active:!scale-[0.98] !transition-all !duration-200"
+              />
+              <UButton
+                label="Зв'язатися"
+                to="/contact"
+                size="xl"
+                variant="ghost"
+                class="!rounded-xl !border !border-white/35 !bg-white/12 !text-white !backdrop-blur-md !font-medium !px-7 !shadow-sm !ring-0 hover:!border-white/55 hover:!bg-white/20 hover:!-translate-y-0.5 hover:!shadow-md active:!translate-y-0 active:!scale-[0.98] !transition-all !duration-200"
+              />
             </div>
           </div>
-          <div class="hidden lg:block">
-            <NuxtImg
-              src="/images/slides/slide_1.jpg"
-              alt="Фаворит ТВ/НЕТ — швидкий інтернет"
-              class="rounded-2xl object-cover w-full h-[400px] shadow-2xl ring-1 ring-white/10"
-              loading="eager"
-            />
+          <div class="hidden lg:flex justify-end">
+            <div class="relative">
+              <NuxtImg
+                src="/images/slides/hero_img_1.png"
+                alt="Фаворит ТВ/НЕТ — швидкий інтернет"
+                class="relative z-10 w-full max-w-[560px] rounded-xl object-cover"
+                loading="eager"
+              />
+              <div class="absolute -inset-8 bg-gradient-to-tr from-blue-500/15 via-transparent to-cyan-400/10 rounded-2xl blur-3xl" />
+            </div>
           </div>
         </div>
       </UContainer>
     </section>
 
-    <!-- Trust blocks -->
-    <section class="bg-white border-b border-slate-200">
-      <UContainer>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 py-10">
+    <!-- Metrics strip (informational, non-interactive) -->
+    <section class="relative z-20 -mt-16 lg:-mt-20 pb-2">
+      <UContainer class="relative z-20">
+        <div
+          class="relative z-10 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_36px_-12px_rgba(15,23,42,0.1),0_24px_56px_-20px_rgba(15,23,42,0.07)]"
+        >
           <div
-            v-for="block in trustBlocks"
-            :key="block.label"
-            class="flex flex-col items-center text-center gap-2"
+            class="grid grid-cols-2 divide-y divide-slate-200/70 lg:grid-cols-4 lg:divide-x lg:divide-y-0"
           >
-            <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center">
-              <UIcon :name="block.icon" class="w-7 h-7 text-blue-600" />
+            <div
+              v-for="block in trustBlocks"
+              :key="block.label"
+              class="flex cursor-default select-none items-center gap-3 px-4 py-4 sm:gap-3.5 sm:px-5 sm:py-5 lg:flex-col lg:items-center lg:justify-center lg:gap-2 lg:px-6 lg:py-6"
+            >
+              <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600"
+                aria-hidden="true"
+              >
+                <UIcon :name="block.icon" class="h-3.5 w-3.5" />
+              </div>
+              <div class="min-w-0 flex-1 text-left lg:flex-none lg:text-center">
+                <p class="text-xl font-bold tabular-nums tracking-tight text-slate-900 sm:text-2xl">
+                  {{ block.value }}
+                </p>
+                <p class="mt-0.5 text-[11px] font-medium leading-snug text-slate-400 sm:text-xs">
+                  {{ block.label }}
+                </p>
+              </div>
             </div>
-            <span class="text-xl font-bold text-slate-900">{{ block.value }}</span>
-            <span class="text-sm text-slate-500">{{ block.label }}</span>
           </div>
         </div>
       </UContainer>
     </section>
 
     <!-- Features -->
-    <section class="bg-slate-50">
+    <section class="bg-slate-50 pt-6">
       <UContainer>
         <FeatureCardsList :items="siteConfig.features" />
       </UContainer>

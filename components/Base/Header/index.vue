@@ -17,7 +17,7 @@ watch(() => route.fullPath, () => onClose());
 </script>
 
 <template>
-  <header ref="headerElRef" class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
+  <header ref="headerElRef" class="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
     <div class="container mx-auto flex justify-between items-center px-4 h-16">
       <div class="flex items-center">
         <slot name="logo" />

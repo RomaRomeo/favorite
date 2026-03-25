@@ -29,7 +29,7 @@ const validate = (state: any): FormError[] => {
 async function onSubmit() {
   loading.value = true;
   try {
-    await $fetch("https://getform.io/f/ayvkkqqb", {
+    await $fetch("https://forminit.com/f/bejrjqda", {
       method: "POST",
       body: { ...state, type: props.type, plan: props.name, category: props.category },
       headers: { Accept: "application/json", "Content-Type": "application/json" },
