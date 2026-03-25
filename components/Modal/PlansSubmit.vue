@@ -35,11 +35,11 @@ async function onSubmit() {
       headers: { Accept: "application/json", "Content-Type": "application/json" },
     });
     toast.success("Дякуємо! Ваша заявка успішно відправлена. Ми зв'яжемося з вами найближчим часом.", "Заявку успішно відправлено!");
+    modal.close();
   } catch {
     toast.error("Сталася помилка під час відправки заявки. Будь ласка, спробуйте ще раз або зв'яжіться з нами.", "Помилка відправки!");
   } finally {
     loading.value = false;
-    modal.close();
   }
 }
 

@@ -7,7 +7,7 @@ color.preference = 'light';
     <AppHeader />
 
     <main class="flex-1">
-      <NuxtPage />
+      <slot />
     </main>
 
     <AppFooter />

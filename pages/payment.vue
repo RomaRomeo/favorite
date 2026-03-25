@@ -6,7 +6,7 @@ useSeoMeta({
   description: 'Оплата інтернет-послуг Фаворит ТВ/НЕТ через ПриватБанк або EasyPay. Швидко, безпечно, без комісій.',
   ogTitle: 'Оплата послуг | Фаворит ТВ/НЕТ',
   ogDescription: 'Оплатіть інтернет-послуги онлайн через ПриватБанк або EasyPay без комісій.',
-  ogImage: '/images/logo/logo-dark.png',
+  ogImage: '/images/logo/logo_dark.png',
 })
 
 const privatbankLink = siteConfig.payment.privatbank

@@ -4,7 +4,7 @@ useSeoMeta({
   description: 'Цифрове телебачення Sweet TV від Фаворит ТВ/НЕТ. Понад 260 каналів у HD-якості, онлайн-кінотеатри, перегляд на будь-якому пристрої.',
   ogTitle: 'Цифрове ТБ Sweet TV | Фаворит ТВ/НЕТ',
   ogDescription: 'Понад 260 каналів у HD-якості. Гнучкі тарифи без прихованих платежів.',
-  ogImage: '/images/logo/logo-dark.png',
+  ogImage: '/images/logo/logo_dark.png',
 })
 
 const benefits = [

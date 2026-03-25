@@ -4,7 +4,7 @@ useSeoMeta({
   description: 'Відповіді на часті питання про інтернет-послуги Фаворит ТВ/НЕТ: підключення, тарифи, оплата, налаштування.',
   ogTitle: 'FAQ | Фаворит ТВ/НЕТ',
   ogDescription: 'Відповіді на популярні питання про послуги інтернет-провайдера Фаворит.',
-  ogImage: '/images/logo/logo-dark.png',
+  ogImage: '/images/logo/logo_dark.png',
 })
 
 const items = [

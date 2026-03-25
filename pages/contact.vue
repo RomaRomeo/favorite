@@ -4,7 +4,7 @@ useSeoMeta({
   description: 'Контакти Фаворит ТВ/НЕТ. Телефон: +38 (067) 93 610 73. Адреса: м. Ходорів, вул. Шептицького, 9.',
   ogTitle: 'Контакти | Фаворит ТВ/НЕТ',
   ogDescription: 'Зв\'яжіться з нами: телефон, email, адреса офісу та карта проїзду.',
-  ogImage: '/images/logo/logo-dark.png',
+  ogImage: '/images/logo/logo_dark.png',
 })
 </script>
 

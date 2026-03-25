@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { ModalPlansSubmit } from "#components";
+import { internetPlans } from "~/data/internet-plans";
 
 useSeoMeta({
   title: 'Тарифні плани Інтернет',
   description: 'Тарифи на інтернет у Ходорові та регіоні від 200 грн/міс. Швидкість до 1 Гбіт/с. Безлімітний трафік.',
   ogTitle: 'Тарифні плани Інтернет | Фаворит ТВ/НЕТ',
   ogDescription: 'Оберіть оптимальний тариф для інтернету. Швидкість до 1 Гбіт/с від 200 грн/міс.',
-  ogImage: '/images/logo/logo-dark.png',
+  ogImage: '/images/logo/logo_dark.png',
 })
 
 const modal = useModal();
 const selectedCategory = ref("ходорів");
-const { data, error, status } = await useFetch<{ data: Plan[] }>("/json/internet-plans.json");
 
-const plans = computed(() => data.value?.data ?? []);
+const plans = computed(() => internetPlans);
 const filteredPlans = computed(() => plans.value.filter((p) => p.category === selectedCategory.value));
 const categories = computed(() => [...new Set(plans.value.map((plan) => plan.category))]);
 
@@ -44,8 +44,8 @@ function onSelectInternetPlanClick(plan: Plan) {
 
     <BaseList
       :items="filteredPlans"
-      :loading="status === 'idle' || status === 'pending'"
-      :error="error?.message"
+      :loading="false"
+      :error="undefined"
       list-class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
     >
       <template #item="{ item }">

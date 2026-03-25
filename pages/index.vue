@@ -6,7 +6,7 @@ useSeoMeta({
   description: 'Фаворит ТВ/НЕТ — інтернет-провайдер у Ходорові та регіоні. Швидкий інтернет, цифрове та кабельне телебачення.',
   ogTitle: 'Фаворит ТВ/НЕТ — Інтернет та телебачення у Ходорові',
   ogDescription: 'Швидкий інтернет до 1 Гбіт/с, цифрове та кабельне ТБ. Підключення від 200 грн/міс.',
-  ogImage: '/images/logo/logo-dark.png',
+  ogImage: '/images/logo/logo_dark.png',
 })
 
 const trustBlocks = [
@@ -25,9 +25,11 @@ const form = reactive({
 })
 const formLoading = ref(false)
 const formSuccess = ref(false)
+const formError = ref(false)
 
 async function submitForm() {
   formLoading.value = true
+  formError.value = false
   try {
     await $fetch('https://forminit.com/f/bejrjqda', {
       method: 'POST',
@@ -40,6 +42,7 @@ async function submitForm() {
     form.settlement = ''
   } catch {
     formSuccess.value = false
+    formError.value = true
   } finally {
     formLoading.value = false
   }
@@ -252,6 +255,12 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
               <p class="text-green-700 font-medium flex items-center justify-center gap-2">
                 <UIcon name="i-heroicons-check-circle-20-solid" class="w-5 h-5" />
                 Дякуємо! Вашу заявку прийнято.
+              </p>
+            </div>
+            <div v-if="formError" class="p-4 bg-red-50 border border-red-200 rounded-xl text-center">
+              <p class="text-red-700 font-medium flex items-center justify-center gap-2">
+                <UIcon name="i-heroicons-exclamation-circle-20-solid" class="w-5 h-5" />
+                Сталася помилка. Спробуйте ще раз.
               </p>
             </div>
           </form>

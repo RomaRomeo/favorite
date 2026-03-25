@@ -11,14 +11,7 @@ const onIframeError = () => {
 };
 
 const onIframeLoad = () => {
-  const script = document.createElement("script");
-  script.src = props.src;
-  document.head.append(script);
-
-  script.onload = () => {
-    loading.value = false;
-  };
-  script.onerror = () => onIframeError();
+  loading.value = false;
 };
 </script>
 

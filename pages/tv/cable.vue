@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { ModalPlansSubmit } from "#components";
+import { cablePlans } from "~/data/cable-plans";
 
 useSeoMeta({
   title: 'Кабельне телебачення',
   description: 'Тарифи кабельного телебачення від Фаворит ТВ/НЕТ у Ходорові. 100 каналів від 100 грн/міс.',
   ogTitle: 'Кабельне ТБ | Фаворит ТВ/НЕТ',
   ogDescription: 'Кабельне телебачення у Ходорові. 100 каналів від 100 грн/міс.',
-  ogImage: '/images/logo/logo-dark.png',
+  ogImage: '/images/logo/logo_dark.png',
 })
 
 const modal = useModal();
 const selectedCategory = ref("ходорів");
-const { data, error, status } = await useFetch<{ data: Plan[] }>("/json/cable-plans.json");
 
-const plans = computed(() => data.value?.data ?? []);
+const plans = computed(() => cablePlans);
 const filteredPlans = computed(() => plans.value.filter((p) => p.category === selectedCategory.value));
 const categories = computed(() => [...new Set(plans.value.map((plan) => plan.category))]);
 
@@ -75,8 +75,8 @@ const benefits = [
 
     <BaseList
       :items="filteredPlans"
-      :loading="status === 'idle' || status === 'pending'"
-      :error="error?.message"
+      :loading="false"
+      :error="undefined"
       list-class="flex justify-center"
     >
       <template #item="{ item }">
