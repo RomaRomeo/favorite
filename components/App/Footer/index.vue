@@ -44,7 +44,7 @@ const socials = [
       <NuxtLink to="/" class="inline-block">
         <img
           src="/images/logo/logo_light.png"
-          width="148"
+          width="280"
           aria-label="Favorite logo"
           alt="Favorite logo"
         />

@@ -6,7 +6,7 @@ useSeoMeta({
   description: 'Фаворит ТВ/НЕТ — інтернет-провайдер у Ходорові та регіоні. Швидкий інтернет, цифрове та кабельне телебачення.',
   ogTitle: 'Фаворит ТВ/НЕТ — Інтернет та телебачення у Ходорові',
   ogDescription: 'Швидкий інтернет до 1 Гбіт/с, цифрове та кабельне ТБ. Підключення від 200 грн/міс.',
-  ogImage: '/images/logo/logo.png',
+  ogImage: '/images/slides/seo_banner.png',
 })
 
 const trustBlocks = [
@@ -74,7 +74,7 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-20 lg:pt-28 pb-32 lg:pb-40">
           <div class="max-w-xl">
             <h1 class="text-4xl lg:text-[3.25rem] font-extrabold text-white leading-[1.1] tracking-tight">
-              Інтернет від ФАВОРИТ швидкий та стабільний
+              Інтернет від ФАВОРИТ <br> швидкий та стабільний
             </h1>
             <p class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md">
               Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Підключення від 200 грн/міс.

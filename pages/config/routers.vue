@@ -7,7 +7,7 @@ useSeoMeta({
   description: 'Покрокові інструкції з налаштування Wi-Fi роутерів TP-Link та Netis від Фаворит ТВ/НЕТ.',
   ogTitle: 'Налаштування роутерів | Фаворит ТВ/НЕТ',
   ogDescription: 'Детальні інструкції з налаштування популярних Wi-Fi роутерів.',
-  ogImage: '/images/logo/logo.png',
+  ogImage: '/images/slides/seo_banner.png',
 })
 
 const modal = useModal();

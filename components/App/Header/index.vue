@@ -45,8 +45,15 @@ function isActive(to?: string) {
 <template>
   <BaseHeader>
     <template #logo>
-      <NuxtLink to="/">
-        <img src="/images/logo/logo_dark.png" width="148" aria-label="Favorite logo" alt="Favorite logo" />
+      <NuxtLink to="/" class="inline-flex shrink-0">
+        <img
+          src="/images/logo/logo_dark.png"
+          class="block h-auto w-[min(200px,calc(100vw-5.5rem))] max-h-[3.5rem] shrink-0 object-contain object-left lg:w-[200px] lg:max-h-none"
+          width="200"
+          height="48"
+          aria-label="Favorite logo"
+          alt="Favorite logo"
+        />
       </NuxtLink>
     </template>
 
