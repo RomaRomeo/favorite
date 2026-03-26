@@ -11,11 +11,6 @@ export const paymentFaq: PaymentFaqItem[] = [
     content: "Онлайн-оплата займає лише кілька секунд і не потребує візиту до банку.",
   },
   {
-    label: "Чи є додаткові комісії?",
-    icon: "material-symbols-light:star-rounded",
-    content: "Ні, оплата проходить без додаткових комісій.",
-  },
-  {
     label: "Що робити, якщо платіж не пройшов?",
     icon: "material-symbols-light:star-rounded",
     content: "Зв'яжіться з нашою підтримкою, і ми допоможемо вирішити проблему.",

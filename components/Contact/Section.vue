@@ -108,6 +108,12 @@ const helpItems = [
       >
         {{ siteConfig.phones[0] }}
       </a>
+      <a
+        :href="`tel:${siteConfig.phones[0].replace(/\s/g, '')}`"
+        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors shrink-0"
+      >
+        {{ siteConfig.phones[1] }}
+      </a>
     </div>
   </div>
 </template>

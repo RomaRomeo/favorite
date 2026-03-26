@@ -25,7 +25,7 @@ const benefits = [
   { icon: 'i-heroicons-tv-20-solid', title: '100+ каналів', description: 'Широкий вибір українських та міжнародних каналів.' },
   { icon: 'i-heroicons-signal-20-solid', title: 'Стабільний сигнал', description: 'Надійне кабельне з\'єднання без переривань.' },
   { icon: 'i-heroicons-bolt-20-solid', title: 'Просте підключення', description: 'Швидке налаштування без складних пристроїв.' },
-  { icon: 'i-heroicons-credit-card-20-solid', title: 'Зручна оплата', description: 'Онлайн через ПриватБанк або EasyPay.' },
+  // { icon: 'i-heroicons-credit-card-20-solid', title: 'Зручна оплата', description: 'Онлайн через ПриватБанк або EasyPay.' },
 ]
 </script>
 
@@ -46,11 +46,11 @@ const benefits = [
     </div>
 
     <!-- Benefits -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-14 ">
       <div
         v-for="item in benefits"
         :key="item.title"
-        class="text-center bg-white border border-slate-200 rounded-2xl p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+        class="w-full max-w-[340px] mx-auto text-center bg-white border border-slate-200 rounded-2xl p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
       >
         <div class="w-11 h-11 mx-auto rounded-xl bg-blue-50 flex items-center justify-center mb-3">
           <UIcon :name="item.icon" class="w-5 h-5 text-blue-600" />

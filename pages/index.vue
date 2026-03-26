@@ -11,7 +11,7 @@ useSeoMeta({
 
 const trustBlocks = [
   { icon: 'i-heroicons-bolt-20-solid', value: 'до 1 Гбіт/с', label: 'Швидкість' },
-  { icon: 'i-heroicons-map-pin-20-solid', value: '23 н.п.', label: 'Покриття' },
+  { icon: 'i-heroicons-map-pin-20-solid', value: '23 локації', label: 'Покриття' },
   { icon: 'i-heroicons-phone-20-solid', value: 'Підтримка', label: 'Пн–Сб' },
   { icon: 'i-heroicons-banknotes-20-solid', value: 'від 200 грн', label: 'На місяць' },
 ]
@@ -74,7 +74,7 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-20 lg:pt-28 pb-32 lg:pb-40">
           <div class="max-w-xl">
             <h1 class="text-4xl lg:text-[3.25rem] font-extrabold text-white leading-[1.1] tracking-tight">
-              Швидкий інтернет у Ходорові та регіоні
+              Інтернет від ФАВОРИТ швидкий та стабільний
             </h1>
             <p class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md">
               Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Підключення від 200 грн/міс.
