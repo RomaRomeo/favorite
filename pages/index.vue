@@ -48,6 +48,12 @@ async function submitForm() {
   }
 }
 
+function scrollToConnectForm() {
+  const el = document.getElementById('connect-form')
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
   const [news, promos] = await Promise.all([
     queryCollection('news').order('date', 'DESC').all(),
@@ -77,21 +83,14 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
               Інтернет від ФАВОРИТ <br> швидкий та стабільний
             </h1>
             <p class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md">
-              Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Підключення від 200 грн/міс.
+              Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Оптимальні тарифи від 200 грн/міс.
             </p>
             <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-10">
               <UButton
-                label="Обрати тариф"
-                to="/internet"
+                label="Підключити інтернет"
                 size="xl"
-                class="!rounded-xl !border-0 !bg-gradient-to-r !from-blue-600 !via-sky-500 !to-cyan-500 !text-white !font-semibold !px-10 !shadow-lg !shadow-cyan-500/25 !ring-1 !ring-white/20 hover:!-translate-y-0.5 hover:!shadow-xl hover:!shadow-cyan-400/35 active:!translate-y-0 active:!scale-[0.98] !transition-all !duration-200"
-              />
-              <UButton
-                label="Зв'язатися"
-                to="/contact"
-                size="xl"
-                variant="ghost"
-                class="!rounded-xl !border !border-white/35 !bg-white/12 !text-white !backdrop-blur-md !font-medium !px-7 !shadow-sm !ring-0 hover:!border-white/55 hover:!bg-white/20 hover:!-translate-y-0.5 hover:!shadow-md active:!translate-y-0 active:!scale-[0.98] !transition-all !duration-200"
+                class="cursor-pointer !rounded-xl !border-0 !bg-gradient-to-r !from-blue-600 !via-sky-500 !to-cyan-500 !text-white !font-semibold !px-10 !shadow-lg !shadow-cyan-500/25 !ring-1 !ring-white/20 hover:!-translate-y-0.5 hover:!shadow-xl hover:!shadow-cyan-400/35 active:!translate-y-0 active:!scale-[0.98] !transition-all !duration-200"
+                @click="scrollToConnectForm"
               />
             </div>
           </div>
@@ -230,12 +229,12 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
     </section>
 
     <!-- Connect form -->
-    <section class="bg-white py-16">
+    <section id="connect-form" class="bg-white py-16 scroll-mt-24">
       <UContainer>
         <div class="max-w-xl mx-auto">
           <div class="text-center mb-8">
-            <h2 class="text-2xl font-bold text-slate-900 lg:text-3xl">Подати заявку</h2>
-            <p class="text-slate-500 mt-2">Заповніть форму, і ми зв'яжемося з вами найближчим часом</p>
+            <h2 class="text-2xl font-bold text-slate-900 lg:text-3xl">Підключити інтернет</h2>
+            <p class="text-slate-500 mt-2">Залиште контакти — ми передзвонимо і підключимо у найкоротший термін</p>
           </div>
           <form
             class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 space-y-5"
@@ -252,7 +251,7 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
             </UFormField>
             <UButton
               type="submit"
-              label="Відправити заявку"
+              label="Підключити інтернет"
               size="xl"
               class="w-full justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold"
               :disabled="!form.name || !form.phone || formLoading"

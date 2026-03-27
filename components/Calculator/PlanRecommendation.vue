@@ -307,9 +307,9 @@ function setOption(model: string, value: string) {
       >
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-blue-100/80">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-1">
-              Рекомендовано для вас
-            </p>
+            <h5 class="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-1">
+              Рекомендований тариф
+            </h5>
             <h4 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
               {{ result.plan.name }}
             </h4>
@@ -353,7 +353,7 @@ function setOption(model: string, value: string) {
 
         <UButton
           icon="i-heroicons-paper-airplane-20-solid"
-          label="Залишити заявку"
+          label="Підключити цей тариф"
           color="primary"
           size="xl"
           class="mt-6 w-full sm:w-auto justify-center font-semibold bg-blue-600 hover:bg-blue-700"

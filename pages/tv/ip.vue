@@ -74,7 +74,7 @@ const benefits = [
 
     <div class="text-center">
       <UButton
-        label="Подати заявку на підключення"
+        label="Підключити інтернет"
         to="/contact"
         size="xl"
         class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8"

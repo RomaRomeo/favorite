@@ -108,7 +108,7 @@ watch(
               :disabled="!state.name || !state.settlement || !state.street || !state.phone || loading"
               :loading="loading"
               type="submit"
-              label="Відправити заявку"
+              label="Підключити цей тариф"
               class="w-full justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold uppercase transition-all duration-200 hover:scale-[1.02]"
               size="xl"
             />

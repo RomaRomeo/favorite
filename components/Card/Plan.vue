@@ -80,7 +80,7 @@ const emit = defineEmits(['onCardClick'])
       </ul>
 
       <UButton
-        label="Обрати тариф"
+        label="Підключити цей тариф"
         :size="props.isRecommended ? 'xl' : 'lg'"
         class="mt-6 w-full justify-center font-semibold cursor-pointer transition-all duration-200"
         :class="props.isRecommended
