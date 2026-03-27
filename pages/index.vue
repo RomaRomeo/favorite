@@ -178,7 +178,11 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
               <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
                 <div class="flex items-center gap-2 mb-1">
                   <span class="text-xs text-white/70">{{ post.date }}</span>
-                  <span v-if="post.category" class="text-xs font-medium bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                  <span
+                    v-if="post.category"
+                    class="text-xs font-medium px-2 py-0.5 rounded-full"
+                    :class="postCategoryBadgeClass(post.category, 'overlay')"
+                  >
                     {{ post.category }}
                   </span>
                 </div>
@@ -188,7 +192,11 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
             <div v-else class="p-5 bg-white">
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-sm text-slate-500">{{ post.date }}</span>
-                <span v-if="post.category" class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+                <span
+                  v-if="post.category"
+                  class="text-xs font-medium px-2 py-0.5 rounded-full"
+                  :class="postCategoryBadgeClass(post.category, 'plain')"
+                >
                   {{ post.category }}
                 </span>
               </div>

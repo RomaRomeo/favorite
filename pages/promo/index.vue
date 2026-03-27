@@ -16,6 +16,6 @@ const { data: posts } = await useAsyncData('promo', () =>
   <UContainer class="pt-10 md:pt-12 pb-16">
     <h2 class="text-3xl font-semibold text-slate-900 mb-4">Акції</h2>
     <USeparator class="my-6" />
-    <PostList :posts="posts" category-color="amber" link-text="Детальніше" empty-text="Акцій ще немає" />
+    <PostList :posts="posts" link-text="Детальніше" empty-text="Акцій ще немає" />
   </UContainer>
 </template>

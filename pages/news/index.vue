@@ -14,6 +14,6 @@ const { data: posts } = await useAsyncData('news', () => queryCollection('news')
   <UContainer class="pt-10 md:pt-12 pb-16">
     <h2 class="text-3xl font-semibold text-slate-900 mb-4">Оголошення</h2>
     <USeparator class="my-6" />
-    <PostList :posts="posts" category-color="blue" empty-text="Оголошень ще немає" />
+    <PostList :posts="posts" empty-text="Оголошень ще немає" />
   </UContainer>
 </template>

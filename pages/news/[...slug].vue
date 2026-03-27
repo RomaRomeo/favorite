@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { postCategoryBadgeClass } from '~/utils/postCategoryBadgeClass';
+
 const route = useRoute()
 const { data: post } = await useAsyncData(`news-${route.path}`, () => queryCollection('news').path(route.path).first())
 
@@ -33,7 +35,7 @@ useSeoMeta({
 
       <div class="flex items-center gap-3 mb-4">
         <span class="text-sm text-gray-500">{{ post.date }}</span>
-        <span v-if="post.category" class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+        <span v-if="post.category" class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full" :class="postCategoryBadgeClass(post.category, 'plain')">
           {{ post.category }}
         </span>
       </div>

@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { postCategoryBadgeClass } from '~/utils/postCategoryBadgeClass';
+
 const props = withDefaults(defineProps<{
   posts?: any[] | null;
   emptyText?: string;
-  categoryColor?: 'blue' | 'amber';
   linkText?: string;
 }>(), {
   posts: null,
@@ -22,9 +23,7 @@ const props = withDefaults(defineProps<{
         <span
           v-if="post.category"
           class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
-          :class="categoryColor === 'amber'
-            ? 'text-amber-700 bg-amber-50 border border-amber-200'
-            : 'text-blue-600 bg-blue-50 border border-blue-200'"
+          :class="postCategoryBadgeClass(post.category, 'plain')"
         >
           {{ post.category }}
         </span>
