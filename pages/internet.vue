@@ -58,5 +58,7 @@ function onSelectInternetPlanClick(plan: Plan) {
         <CardPlanSkeleton />
       </template>
     </BaseList>
+
+    <CalculatorPlanRecommendation :category="selectedCategory" />
   </UContainer>
 </template>
