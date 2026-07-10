@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { siteConfig } from '~/config/site'
+import { settlementPoints } from '~/data/coverage'
+import CoverageMap from '~/components/Coveragemap.vue'
 
 useSeoMeta({
   title: 'Інтернет у Ходорові та регіоні | Фаворит ТВ/НЕТ',
@@ -57,6 +59,11 @@ function scrollToConnectForm() {
   el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
+function connectFromCoverage() {
+  form.settlement = selectedSettlement.value
+  scrollToConnectForm()
+}
+
 const isMounted = ref(false)
 onMounted(() => { isMounted.value = true })
 
@@ -87,39 +94,30 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
       <!-- Scrim: left 55% only — boosts text contrast, right half breathes with canvas -->
       <div
         class="absolute inset-y-0 left-0 w-[55%] bg-linear-to-r from-slate-950/80 via-slate-950/25 to-transparent pointer-events-none"
-        style="z-index: 2;"
-      />
+        style="z-index: 2;" />
       <!-- Bottom fade: softens hero→metrics-strip transition -->
-      <div
-        class="absolute bottom-0 inset-x-0 h-28 bg-linear-to-t from-slate-950/55 to-transparent pointer-events-none"
-        style="z-index: 2;"
-      />
+      <div class="absolute bottom-0 inset-x-0 h-28 bg-linear-to-t from-slate-950/55 to-transparent pointer-events-none"
+        style="z-index: 2;" />
 
       <UContainer class="relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-20 lg:pt-28 pb-32 lg:pb-40">
           <div class="max-w-xl">
             <h1
               class="text-4xl lg:text-[3.25rem] font-extrabold text-white leading-[1.1] tracking-tight transition-[opacity,transform] duration-500 motion-reduce:opacity-100! motion-reduce:translate-y-0!"
-              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
-            >
+              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'">
               Інтернет від ФАВОРИТ <br> швидкий та стабільний
             </h1>
-            <p
-              class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md transition-[opacity,transform] duration-500 delay-200 motion-reduce:opacity-100! motion-reduce:translate-y-0!"
-              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
-            >
-              Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Оптимальні тарифи від 250 грн/міс.
+            <p class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md transition-[opacity,transform] duration-500 delay-200 motion-reduce:opacity-100! motion-reduce:translate-y-0!"
+              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'">
+              Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Оптимальні тарифи від 250
+              грн/міс.
             </p>
             <div
               class="flex flex-wrap items-center gap-3 sm:gap-4 mt-10 transition-[opacity,transform] duration-500 delay-400 motion-reduce:opacity-100! motion-reduce:translate-y-0!"
-              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
-            >
-              <UButton
-                label="Підключити інтернет"
-                size="xl"
+              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'">
+              <UButton label="Підключити інтернет" size="xl"
                 class="cursor-pointer rounded-xl! border-0! bg-linear-to-r! from-blue-600! via-sky-500! to-cyan-500! text-white! font-semibold! px-10! shadow-lg! shadow-cyan-500/25! ring-1! ring-white/20! hover:-translate-y-0.5! hover:shadow-xl! hover:shadow-cyan-400/35! active:translate-y-0! active:scale-[0.98]! transition-all! duration-200!"
-                @click="scrollToConnectForm"
-              />
+                @click="scrollToConnectForm" />
             </div>
           </div>
           <!-- Right column: intentionally empty — canvas light-node fills this space -->
@@ -131,20 +129,12 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
     <section class="relative z-20 -mt-16 lg:-mt-20 pb-2">
       <UContainer class="relative z-20">
         <div
-          class="relative z-10 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_36px_-12px_rgba(15,23,42,0.1),0_24px_56px_-20px_rgba(15,23,42,0.07)]"
-        >
-          <div
-            class="grid grid-cols-2 divide-y divide-slate-200/70 lg:grid-cols-4 lg:divide-x lg:divide-y-0"
-          >
-            <div
-              v-for="block in trustBlocks"
-              :key="block.label"
-              class="flex cursor-default select-none items-center gap-3 px-4 py-4 sm:gap-3.5 sm:px-5 sm:py-5 lg:flex-col lg:items-center lg:justify-center lg:gap-2 lg:px-6 lg:py-6"
-            >
-              <div
-                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600"
-                aria-hidden="true"
-              >
+          class="relative z-10 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_10px_36px_-12px_rgba(15,23,42,0.1),0_24px_56px_-20px_rgba(15,23,42,0.07)]">
+          <div class="grid grid-cols-2 divide-y divide-slate-200/70 lg:grid-cols-4 lg:divide-x lg:divide-y-0">
+            <div v-for="block in trustBlocks" :key="block.label"
+              class="flex cursor-default select-none items-center gap-3 px-4 py-4 sm:gap-3.5 sm:px-5 sm:py-5 lg:flex-col lg:items-center lg:justify-center lg:gap-2 lg:px-6 lg:py-6">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600"
+                aria-hidden="true">
                 <UIcon :name="block.icon" class="h-3.5 w-3.5" />
               </div>
               <div class="min-w-0 flex-1 text-left lg:flex-none lg:text-center">
@@ -178,28 +168,18 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
           </p>
         </div>
         <div v-if="latestPosts?.length" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <NuxtLink
-            v-for="post in latestPosts"
-            :key="post.path"
-            :to="post.path"
-            class="group block rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-          >
+          <NuxtLink v-for="post in latestPosts" :key="post.path" :to="post.path"
+            class="group block rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <div v-if="post.image" class="relative h-52 overflow-hidden">
-              <NuxtImg
-                :src="post.image"
-                :alt="post.title"
+              <NuxtImg :src="post.image" :alt="post.title"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
+                loading="lazy" />
               <div class="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
               <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
                 <div class="flex items-center gap-2 mb-1">
                   <span class="text-xs text-white/70">{{ post.date }}</span>
-                  <span
-                    v-if="post.category"
-                    class="text-xs font-medium px-2 py-0.5 rounded-full"
-                    :class="postCategoryBadgeClass(post.category, 'overlay')"
-                  >
+                  <span v-if="post.category" class="text-xs font-medium px-2 py-0.5 rounded-full"
+                    :class="postCategoryBadgeClass(post.category, 'overlay')">
                     {{ post.category }}
                   </span>
                 </div>
@@ -209,11 +189,8 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
             <div v-else class="p-5 bg-white">
               <div class="flex items-center gap-2 mb-2">
                 <span class="text-sm text-slate-500">{{ post.date }}</span>
-                <span
-                  v-if="post.category"
-                  class="text-xs font-medium px-2 py-0.5 rounded-full"
-                  :class="postCategoryBadgeClass(post.category, 'plain')"
-                >
+                <span v-if="post.category" class="text-xs font-medium px-2 py-0.5 rounded-full"
+                  :class="postCategoryBadgeClass(post.category, 'plain')">
                   {{ post.category }}
                 </span>
               </div>
@@ -225,24 +202,35 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
     </section>
 
     <!-- Coverage check -->
-    <section class="bg-slate-50 py-16">
+    <section class="bg-slate-50 py-5">
       <UContainer>
         <div class="max-w-xl mx-auto text-center">
           <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-green-50 mb-4">
             <UIcon name="i-heroicons-map-pin-20-solid" class="w-7 h-7 text-green-600" />
           </div>
-          <h2 class="text-2xl font-bold text-slate-900 lg:text-3xl mb-2">Зона покриття</h2>
-          <p class="text-slate-500 mb-8">
-            Оберіть населений пункт, щоб перевірити доступність підключення
-          </p>
-          <SelectorSettlements v-model="selectedSettlement" placeholder="Оберіть населений пункт" size="xl" />
-          <div v-if="selectedSettlement" class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl">
-            <p class="text-green-700 font-medium flex items-center justify-center gap-2">
-              <UIcon name="i-heroicons-check-circle-20-solid" class="w-5 h-5" />
-              Підключення у {{ selectedSettlement }} доступне!
-            </p>
+          <div class="mx-auto max-w-3xl px-6 text-center">
+            <h2 class="text-2xl font-bold text-slate-900 lg:text-3xl">Зона покриття</h2>
+            <p class="mt-2 text-slate-500">Оберіть свій населений пункт на карті або зі списку</p>
+
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <div class="w-full max-w-xs sm:w-auto">
+                <SelectorSettlements v-model="selectedSettlement" placeholder="Оберіть населений пункт" size="xl" />
+              </div>
+              <UButton v-if="selectedSettlement" label="Залишити заявку" size="xl"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 whitespace-nowrap"
+                @click="connectFromCoverage" />
+            </div>
           </div>
         </div>
+
+        <div class="mt-8 w-full hidden md:block">
+          <CoverageMap :towns="settlementPoints" v-model:selected="selectedSettlement" />
+        </div>
+
+        <p class="mt-3 text-sm text-center text-slate-400">
+          Не знайшли свій пункт? <NuxtLink to="/contact" class="font-medium text-blue-600 hover:underline">Напишіть
+            нам</NuxtLink> — перевіримо можливість.
+        </p>
       </UContainer>
     </section>
 
@@ -252,13 +240,13 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
         <div class="max-w-xl mx-auto">
           <div class="text-center mb-8">
             <h2 class="text-2xl font-bold text-slate-900 lg:text-3xl">Заявка на нове підключення</h2>
-            <p class="text-slate-500 mt-2">Заповніть форму, якщо хочете підключити інтернет або телебачення. Ми передзвонимо для уточнення деталей.</p>
+            <p class="text-slate-500 mt-2">Заповніть форму, якщо хочете підключити інтернет або телебачення. Ми
+              передзвонимо для уточнення деталей.</p>
           </div>
-          <form
-            class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 space-y-5"
-            @submit.prevent="submitForm"
-          >
-            <div class="flex items-start gap-2.5 rounded-xl border border-blue-100 bg-blue-50/60 px-4 py-3 text-sm text-slate-600">
+          <form class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 space-y-5"
+            @submit.prevent="submitForm">
+            <div
+              class="flex items-start gap-2.5 rounded-xl border border-blue-100 bg-blue-50/60 px-4 py-3 text-sm text-slate-600">
               <UIcon name="i-heroicons-information-circle-20-solid" class="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
               <p>
                 Ця форма лише для <strong>нового підключення!</strong>
@@ -274,15 +262,10 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
               <SelectorSettlements v-model="form.settlement" placeholder="Оберіть населений пункт" size="xl" />
             </UFormField>
             <div class="space-y-2">
-              <UCheckbox
-                v-model="form.isNewConnectionConfirmed"
-                label="Підтверджую, що це заявка на нове підключення, а не звернення щодо існуючої послуги."
-              />
+              <UCheckbox v-model="form.isNewConnectionConfirmed"
+                label="Підтверджую, що це заявка на нове підключення, а не звернення щодо існуючої послуги." />
             </div>
-            <UButton
-              type="submit"
-              label="Підключити інтернет"
-              size="xl"
+            <UButton type="submit" label="Підключити інтернет" size="xl"
               class="w-full justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold"
               :disabled="!form.name || !form.phone || !form.settlement || !form.isNewConnectionConfirmed || formLoading"
               :loading="formLoading"

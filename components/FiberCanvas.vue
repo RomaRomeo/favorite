@@ -57,7 +57,7 @@ function buildScene(w, h) {
   // 3 outgoing rays: node → right edge, fanning out
   const outDefs = [
     { c0x: NX + w * 0.06, c0y: NY - h * 0.10, c1x: w * 0.89, c1y: h * 0.20, ex: w, ey: h * 0.12 },
-    { c0x: NX + w * 0.07, c0y: NY - h * 0.01, c1x: w * 0.91, c1y: NY - h * 0.02, ex: w, ey: NY  },
+    { c0x: NX + w * 0.07, c0y: NY - h * 0.01, c1x: w * 0.91, c1y: NY - h * 0.02, ex: w, ey: NY },
     { c0x: NX + w * 0.06, c0y: NY + h * 0.10, c1x: w * 0.89, c1y: h * 0.70, ex: w, ey: h * 0.76 },
   ]
 
@@ -84,7 +84,7 @@ function buildScene(w, h) {
     return Array.from({ length: n }, (_, j) => ({
       fi,
       t: ((fi * 3 + j * 5) % 11) / 11,
-      speed: 0.0012 + ((fi * 5 + j * 3) % 9) * 0.00014,
+      speed: 0.0006 + ((fi * 5 + j * 3) % 9) * 0.00007,
       rgb: RGBS[(fi + j) % RGBS.length],
       // Outgoing ray pulses are larger and brighter
       r: isOut ? 3.8 + j * 0.9 : 2.4 + ((fi + j) % 4) * 0.55,
@@ -108,9 +108,9 @@ function renderNodeGlow(ctx) {
 
   // Wide outer corona — sets the mood
   const g0 = ctx.createRadialGradient(NX, NY, 0, NX, NY, base * 0.28)
-  g0.addColorStop(0,    'rgba(56,189,248,0.16)')
+  g0.addColorStop(0, 'rgba(56,189,248,0.16)')
   g0.addColorStop(0.45, 'rgba(56,189,248,0.06)')
-  g0.addColorStop(1,    'rgba(14,165,233,0)')
+  g0.addColorStop(1, 'rgba(14,165,233,0)')
   ctx.beginPath()
   ctx.arc(NX, NY, base * 0.28, 0, Math.PI * 2)
   ctx.fillStyle = g0
@@ -119,9 +119,9 @@ function renderNodeGlow(ctx) {
   // Medium glow — breathes gently
   const rMed = base * 0.10 * nodeBreath
   const g1 = ctx.createRadialGradient(NX, NY, 0, NX, NY, rMed)
-  g1.addColorStop(0,    `rgba(147,223,255,${(0.72 * nodeBreath).toFixed(3)})`)
+  g1.addColorStop(0, `rgba(147,223,255,${(0.72 * nodeBreath).toFixed(3)})`)
   g1.addColorStop(0.40, 'rgba(56,189,248,0.28)')
-  g1.addColorStop(1,    'rgba(14,165,233,0)')
+  g1.addColorStop(1, 'rgba(14,165,233,0)')
   ctx.beginPath()
   ctx.arc(NX, NY, rMed, 0, Math.PI * 2)
   ctx.fillStyle = g1
@@ -130,9 +130,9 @@ function renderNodeGlow(ctx) {
   // White-hot core — breathes gently
   const rCore = base * 0.030 * nodeBreath
   const g2 = ctx.createRadialGradient(NX, NY, 0, NX, NY, rCore)
-  g2.addColorStop(0,    `rgba(255,255,255,${(0.94 * nodeBreath).toFixed(3)})`)
+  g2.addColorStop(0, `rgba(255,255,255,${(0.94 * nodeBreath).toFixed(3)})`)
   g2.addColorStop(0.45, 'rgba(147,223,255,0.72)')
-  g2.addColorStop(1,    'rgba(56,189,248,0)')
+  g2.addColorStop(1, 'rgba(56,189,248,0)')
   ctx.beginPath()
   ctx.arc(NX, NY, rCore, 0, Math.PI * 2)
   ctx.fillStyle = g2
@@ -181,10 +181,10 @@ function render(ctx, reduced) {
     const r = p.r
 
     const g = ctx.createRadialGradient(px, py, 0, px, py, r * 5)
-    g.addColorStop(0,    `rgba(${p.rgb},${(0.85 * xAlpha).toFixed(2)})`)
+    g.addColorStop(0, `rgba(${p.rgb},${(0.85 * xAlpha).toFixed(2)})`)
     g.addColorStop(0.25, `rgba(${p.rgb},${(0.46 * xAlpha).toFixed(2)})`)
     g.addColorStop(0.65, `rgba(${p.rgb},${(0.08 * xAlpha).toFixed(2)})`)
-    g.addColorStop(1,    `rgba(${p.rgb},0)`)
+    g.addColorStop(1, `rgba(${p.rgb},0)`)
     ctx.beginPath()
     ctx.arc(px, py, r * 5, 0, Math.PI * 2)
     ctx.fillStyle = g
@@ -234,9 +234,9 @@ onMounted(() => {
     W = section.offsetWidth
     H = section.offsetHeight
     if (!W || !H) return
-    canvas.width  = Math.round(W * dpr)
+    canvas.width = Math.round(W * dpr)
     canvas.height = Math.round(H * dpr)
-    canvas.style.width  = W + 'px'
+    canvas.style.width = W + 'px'
     canvas.style.height = H + 'px'
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     buildScene(W, H)
@@ -269,10 +269,5 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <canvas
-    ref="el"
-    class="absolute inset-0 pointer-events-none"
-    style="z-index: 1;"
-    aria-hidden="true"
-  />
+  <canvas ref="el" class="absolute inset-0 pointer-events-none" style="z-index: 1;" aria-hidden="true" />
 </template>
