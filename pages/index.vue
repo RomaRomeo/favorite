@@ -57,6 +57,9 @@ function scrollToConnectForm() {
   el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
+const isMounted = ref(false)
+onMounted(() => { isMounted.value = true })
+
 const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
   const [news, promos] = await Promise.all([
     queryCollection('news').order('date', 'DESC').all(),
@@ -72,23 +75,45 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
   <div>
     <!-- Hero -->
     <section class="relative overflow-hidden bg-linear-to-br from-slate-950 via-blue-950 to-cyan-950">
+      <!-- Soft CSS ambient glow reinforcing the canvas light-node (≈72% from left on desktop) -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-48 -right-48 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[150px]" />
-        <div class="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[130px]" />
-        <div class="absolute top-1/2 left-1/3 w-[600px] h-[600px] bg-blue-600/4 rounded-full blur-[180px]" />
+        <div class="absolute top-[26%] right-[22%] w-[420px] h-[420px] bg-blue-400/10 rounded-full blur-[130px]" />
       </div>
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
+
+      <ClientOnly>
+        <FiberCanvas />
+      </ClientOnly>
+
+      <!-- Scrim: left 55% only — boosts text contrast, right half breathes with canvas -->
+      <div
+        class="absolute inset-y-0 left-0 w-[55%] bg-linear-to-r from-slate-950/80 via-slate-950/25 to-transparent pointer-events-none"
+        style="z-index: 2;"
+      />
+      <!-- Bottom fade: softens hero→metrics-strip transition -->
+      <div
+        class="absolute bottom-0 inset-x-0 h-28 bg-linear-to-t from-slate-950/55 to-transparent pointer-events-none"
+        style="z-index: 2;"
+      />
 
       <UContainer class="relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-20 lg:pt-28 pb-32 lg:pb-40">
           <div class="max-w-xl">
-            <h1 class="text-4xl lg:text-[3.25rem] font-extrabold text-white leading-[1.1] tracking-tight">
+            <h1
+              class="text-4xl lg:text-[3.25rem] font-extrabold text-white leading-[1.1] tracking-tight transition-[opacity,transform] duration-500 motion-reduce:opacity-100! motion-reduce:translate-y-0!"
+              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+            >
               Інтернет від ФАВОРИТ <br> швидкий та стабільний
             </h1>
-            <p class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md">
+            <p
+              class="mt-7 text-lg leading-relaxed text-blue-100/65 max-w-md transition-[opacity,transform] duration-500 delay-200 motion-reduce:opacity-100! motion-reduce:translate-y-0!"
+              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+            >
               Стабільне оптоволоконне з'єднання до 1 Гбіт/с, цифрове та кабельне телебачення. Оптимальні тарифи від 250 грн/міс.
             </p>
-            <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-10">
+            <div
+              class="flex flex-wrap items-center gap-3 sm:gap-4 mt-10 transition-[opacity,transform] duration-500 delay-400 motion-reduce:opacity-100! motion-reduce:translate-y-0!"
+              :class="isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+            >
               <UButton
                 label="Підключити інтернет"
                 size="xl"
@@ -97,17 +122,7 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
               />
             </div>
           </div>
-          <div class="hidden lg:flex justify-end">
-            <div class="relative">
-              <NuxtImg
-                src="/images/slides/hero_img_1.png"
-                alt="Фаворит ТВ/НЕТ — швидкий інтернет"
-                class="relative z-10 w-full max-w-[560px] rounded-xl object-cover"
-                loading="eager"
-              />
-              <div class="absolute -inset-8 bg-linear-to-tr from-blue-500/15 via-transparent to-cyan-400/10 rounded-2xl blur-3xl" />
-            </div>
-          </div>
+          <!-- Right column: intentionally empty — canvas light-node fills this space -->
         </div>
       </UContainer>
     </section>
@@ -246,11 +261,7 @@ const { data: latestPosts } = await useAsyncData('latest-posts', async () => {
             <div class="flex items-start gap-2.5 rounded-xl border border-blue-100 bg-blue-50/60 px-4 py-3 text-sm text-slate-600">
               <UIcon name="i-heroicons-information-circle-20-solid" class="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
               <p>
-                Ця форма лише для <strong>нового підключення</strong>. Для оплати, ремонту або відсутності інтернету звертайтесь через
-                <NuxtLink to="/contact" class="font-medium underline underline-offset-2 hover:text-slate-800">Контакти</NuxtLink>,
-                <a :href="siteConfig.social.viber" target="_blank" rel="noopener" class="font-medium underline underline-offset-2 hover:text-slate-800">Viber</a>,
-                <a :href="siteConfig.social.telegram" target="_blank" rel="noopener" class="font-medium underline underline-offset-2 hover:text-slate-800">Telegram</a>
-                або за телефоном.
+                Ця форма лише для <strong>нового підключення!</strong>
               </p>
             </div>
             <UFormField label="Ваше ім'я" required>
